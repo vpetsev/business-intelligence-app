@@ -117,3 +117,28 @@ $ code .
 
 - **David Carlisle**
 - **Victor Petsev**
+
+
+## Local configuration and regression tests
+
+Use an isolated PostgreSQL database. The committed configuration contains no database passwords; `server/config/config.js` reads `DATABASE_URL` or the `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, and `DB_PASSWORD` environment variables. Production requires `DATABASE_URL`. Previously committed credentials must be rotated by the database owner; deleting them from the current tree cannot revoke copies or remove Git history.
+
+From `server`, install dependencies, copy `.env.example` to `.env`, set a strong random `JWT_PASSWORD`, configure the database, and run:
+
+```sh
+npm install
+npx sequelize-cli@5 db:migrate
+npm start
+```
+
+The API listens on port 3001 (override with `PORT`). Guest login is disabled unless `REACT_APP_USERNAME` and `REACT_APP_PASSWORD` identify an existing account. User and guest tokens share the required signing key, include the user ID, and expire after one hour. Saved data reads/uploads require a Bearer token; callers may only access their own user ID. Existing rows with a null owner cannot be reliably attributed automatically and need separate recovery if their ownership is known.
+
+From `client`, configure `NEXT_PUBLIC_API_BASE_URL` (default `http://localhost:3001`) before starting or building Next, then run `npm install` and `npm run dev`. On Node 22, this legacy Next 9 build also needs `NODE_OPTIONS=--openssl-legacy-provider`. API URL changes require restarting/rebuilding Next.
+
+The regression suite requires Node 18+ and a fresh, empty PostgreSQL database. It refuses an existing schema and never drops user data. From `server`:
+
+```sh
+TEST_DATABASE_URL=postgres://postgres@127.0.0.1:5432/bi_test npm test
+```
+
+Tests apply all migrations and exercise real HTTP login failures, valid/invalid/expired tokens, guest identity, cross-user denial, CSV ownership and completed responses, and database-error responses. The new company migration supplies the column already used by the chart model. A misspelled association is corrected without introducing a second `UserId` column.

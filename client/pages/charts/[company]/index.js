@@ -1,3 +1,4 @@
+import { apiUrl } from "../../../utils/Api";
 import React, { useEffect, useState } from "react";
 import { Line, Bar } from "react-chartjs-2";
 import Navbar from "../../../components/Layouts/Navbar";
@@ -14,8 +15,8 @@ const Company = () => {
   const [companyName, setCompanyName] = useState("");
 
   useEffect(() => {
-    fetch(`https://bi-cube.herokuapp.com/${company}`)
-      // fetch(`http://localhost:3001/${company}`)
+    if (!company) return;
+    fetch(apiUrl(`/${company}`))
       .then((response) => response.json())
       .then((result) => {
         let data = result.sort(function (a, b) {
@@ -28,7 +29,7 @@ const Company = () => {
         let companyLetter = company.charAt(0).toUpperCase();
         setCompanyName(companyLetter + company.slice(1));
       });
-  });
+  }, [company]);
 
   const labelsDate = financials.map((financeDate) => {
     return financeDate.date;

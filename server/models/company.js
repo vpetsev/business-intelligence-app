@@ -5,10 +5,10 @@ module.exports = (sequelize, DataTypes) => {
     {
       symbol: DataTypes.STRING,
       date: DataTypes.STRING,
-      revenue: DataTypes.INTEGER,
-      costAndExpenses: DataTypes.INTEGER,
-      grossProfit: DataTypes.INTEGER,
-      costOfRevenue: DataTypes.INTEGER,
+      revenue: DataTypes.BIGINT,
+      costAndExpenses: DataTypes.BIGINT,
+      grossProfit: DataTypes.BIGINT,
+      costOfRevenue: DataTypes.BIGINT,
     },
     {}
   );
