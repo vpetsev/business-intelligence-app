@@ -42,7 +42,7 @@ test('invalid login reports a useful error and keeps the form usable', async ({ 
   await page.getByLabel('Username', { exact: true }).fill('not_a_registered_account');
   await page.getByLabel('Password', { exact: true }).fill(password);
   await page.getByRole('button', { name: 'Log in', exact: true }).click();
-  await expect(page.getByRole('alert')).toContainText(/incorrect|invalid/i);
+  await expect(page.getByRole('main').getByRole('alert')).toContainText(/incorrect|invalid/i);
   await expect(page.getByRole('button', { name: 'Log in', exact: true })).toBeEnabled();
   await expect(page).toHaveURL(/\/login/);
 });
@@ -92,7 +92,7 @@ test('chart service failure is presented as an error instead of a crash', async 
     status: 503, contentType: 'application/json', body: JSON.stringify({ message: 'Chart service unavailable.' }),
   }));
   await page.goto('/charts/apple');
-  await expect(page.getByRole('alert')).toBeVisible();
+  await expect(page.getByRole('main').getByRole('alert')).toBeVisible();
 });
 
 test('core pages have no WCAG A/AA violations and work at mobile width', async ({ page }) => {
