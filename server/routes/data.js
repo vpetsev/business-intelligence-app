@@ -4,7 +4,7 @@ const auth = require('../middlewares/authMiddleware');
 const { parse, rows, positiveId, companyRows } = require('../lib/validation');
 const { HttpError } = require('../lib/errors');
 const MAX_SAVED_ROWS = 10000;
-const numericText = value => String(value);
+const { difference } = require('../lib/decimal');
 function pagination(query) {
   const { limit = '50', offset = '0' } = query;
   if (typeof limit !== 'string' || typeof offset !== 'string' || !/^\d+$/.test(limit) || !/^\d+$/.test(offset) || +limit < 1 || +limit > 200 || !Number.isSafeInteger(+offset)) throw new HttpError(400, 'limit must be 1–200 and offset a nonnegative integer.');
@@ -31,7 +31,7 @@ router.get('/api/data/export', auth, async (req, res) => {
 });
 router.post('/api/data', auth, auth.writable, async (req, res) => {
   const input = parse(rows, req.body);
-  const data = input.map(row => ({ company: row.company, revenue: numericText(row.Revenue), expenses: numericText(row.Expenses), cost_expenses: numericText(row.costAndExpenses ?? row.Expenses), gross_profit: numericText(row.grossProfit ?? Number((row.Revenue - row.Expenses).toFixed(4))), userId: req.user.id }));
+  const data = input.map(row => ({ company: row.company, revenue: row.Revenue, expenses: row.Expenses, cost_expenses: row.costAndExpenses ?? row.Expenses, gross_profit: row.grossProfit ?? difference(row.Revenue, row.Expenses), userId: req.user.id }));
   await models.sequelize.transaction(async transaction => {
     // Serialize per-owner imports so concurrent requests cannot bypass the quota.
     await models.User.findByPk(req.user.id, { transaction, lock: transaction.LOCK.UPDATE });

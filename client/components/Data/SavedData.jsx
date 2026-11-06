@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useSession } from '../../context/SessionContext';
 import { apiUrl } from '../../utils/Api';
 import { CSV_EXAMPLE, parseFinancialCsv } from '../../utils/csv';
-import { chartData, formatAmount, numeric } from '../../utils/financials';
+import { chartData, formatAmount } from '../../utils/financials';
 const FinancialCharts = dynamic(() => import('../Charts/FinancialCharts'), { ssr: false });
 const PAGE_SIZE = 25;
 export default function SavedData() {
@@ -81,7 +81,7 @@ function AccountData({ user }) {
         <FinancialCharts data={chartData(rows, 'company', true)} title="Saved financial data" />
         <div className="app-table-wrapper"><table className="app-table"><caption>Saved financial data in USD</caption>
           <thead><tr><th scope="col">Company</th><th scope="col">Revenue</th><th scope="col">Expenses</th><th scope="col">Cost and expenses</th><th scope="col">Gross profit</th>{!user.readOnly && <th scope="col">Actions</th>}</tr></thead>
-          <tbody>{rows.map(row => <tr key={row.id}><td>{row.company}</td><td>{formatAmount(numeric(row.revenue))}</td><td>{formatAmount(numeric(row.expenses))}</td><td>{formatAmount(numeric(row.cost_expenses))}</td><td>{formatAmount(numeric(row.gross_profit))}</td>{!user.readOnly && <td><button type="button" disabled={busy} aria-label={`Delete ${row.company}`} onClick={() => remove(row)}>Delete</button></td>}</tr>)}</tbody>
+          <tbody>{rows.map(row => <tr key={row.id}><td>{row.company}</td><td>{formatAmount(row.revenue)}</td><td>{formatAmount(row.expenses)}</td><td>{formatAmount(row.cost_expenses)}</td><td>{formatAmount(row.gross_profit)}</td>{!user.readOnly && <td><button type="button" disabled={busy} aria-label={`Delete ${row.company}`} onClick={() => remove(row)}>Delete</button></td>}</tr>)}</tbody>
         </table></div>
       </>}
       {total > PAGE_SIZE && <nav className="pagination" aria-label="Saved data pages"><button disabled={busy || offset === 0} onClick={() => setOffset(Math.max(0, offset - PAGE_SIZE))}>Previous</button><span>Rows {offset + 1}–{Math.min(offset + PAGE_SIZE, total)} of {total}</span><button disabled={busy || offset + PAGE_SIZE >= total} onClick={() => setOffset(offset + PAGE_SIZE)}>Next</button></nav>}

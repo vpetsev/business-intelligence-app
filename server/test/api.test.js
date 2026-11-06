@@ -98,6 +98,30 @@ test('API contracts against an empty migrated PostgreSQL database', { timeout: 9
       assert.equal((await call('/api/data/' + id, { method: 'DELETE', token })).status, 404);
       assert.equal((await call('/api/data/no', { method: 'DELETE', token })).status, 400);
     });
+    await t.test('financial decimals retain exact digits through JSON, persistence, calculation, and CSV export', async () => {
+      const token = ownerSession.json.token;
+      const body = [
+        { company: 'Exact string', Revenue: '900000000000.0003', Expenses: '0.0001' },
+        { company: 'Exact supplied profit', Revenue: '-900000000000.0003', Expenses: '-0.0001', grossProfit: '-900000000000.0003', costAndExpenses: '1.2300' },
+      ];
+      assert.equal((await call('/api/data', { method: 'POST', token, body })).status, 201);
+      const raw = '[{"company":"Exact JSON literal","Revenue":900000000000.0003,"Expenses":1e-4}]';
+      assert.equal((await call('/api/data', { method: 'POST', token, raw, headers: { 'Content-Type': 'application/json' } })).status, 201);
+      const saved = (await call('/api/data', { token })).json.rows;
+      for (const name of ['Exact string', 'Exact JSON literal']) {
+        const found = saved.find(row => row.company === name);
+        assert.equal(found.revenue, '900000000000.0003');
+        assert.equal(found.expenses, '0.0001');
+        assert.equal(found.gross_profit, '900000000000.0002');
+      }
+      const supplied = saved.find(row => row.company === 'Exact supplied profit');
+      assert.equal(supplied.gross_profit, '-900000000000.0003');
+      assert.equal(supplied.cost_expenses, '1.23');
+      const exported = await call('/api/data/export', { token });
+      assert(exported.text.includes('"Exact string","900000000000.0003","0.0001","0.0001","900000000000.0002"'));
+      assert(exported.text.includes('"Exact JSON literal","900000000000.0003","0.0001","0.0001","900000000000.0002"'));
+      assert.equal((await call('/api/data', { method: 'POST', token, body: [{ company: 'Exact boundary', Revenue: '999999999999.0001', Expenses: '0' }] })).status, 400);
+    });
     await t.test('admin imports validate and reject duplicate company rows atomically', async () => {
       const body = [{ symbol: 'AAPL', date: '2020-03-28', revenue: 1000, costAndExpenses: 500, grossProfit: 500 }];
       assert.equal((await call('/chart-data', { method: 'POST', token: ownerSession.json.token, body })).status, 403);

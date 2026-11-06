@@ -3,7 +3,7 @@ import { parseFinancialCsv } from '../utils/csv';
 import { availableYears, chartData, financialRows, formatAmount, numeric } from '../utils/financials';
 describe('CSV import validation', () => {
   it('parses quoted company names and optional numbers without confusing zero and missing values', () => {
-    expect(parseFinancialCsv('company,Revenue,Expenses,grossProfit\n"Example, Inc.",0,-2,\n')).toEqual([{ company: 'Example, Inc.', Revenue: 0, Expenses: -2 }]);
+    expect(parseFinancialCsv('company,Revenue,Expenses,grossProfit\n"Example, Inc.",0,-2,\n')).toEqual([{ company: 'Example, Inc.', Revenue: '0', Expenses: '-2' }]);
   });
   it.each([
     ['company,Expenses\nA,1', /headers/],
@@ -11,11 +11,26 @@ describe('CSV import validation', () => {
     ['company,Revenue,Expenses\nA,Infinity,2', /finite number/],
     ['company,Revenue,Expenses\nA,1000000000000,2', /four decimal places/],
     ['company,Revenue,Expenses\nA,0.12345,2', /four decimal places/],
+    ['company,Revenue,Expenses\nA,900000000000.00001,2', /four decimal places/],
+    ['company,Revenue,Expenses\nA,999999999999.0001,2', /four decimal places/],
+    ['company,Revenue,Expenses\nA,1e999999999999999999,2', /four decimal places/],
     ['company,Revenue,Expenses\nA,,2', /finite number/],
     ['company,Revenue,Expenses\n,1,2', /company/],
     ['company,Revenue,Expenses\nA,1,2,3', /could not be read/],
     ['company,Revenue,Expenses\n', /between 1/],
   ])('rejects malformed or ambiguous input: %s', (csv, error) => expect(() => parseFinancialCsv(csv)).toThrow(error));
+  it('keeps all supported decimal digits through JSON serialization, including exponent inputs', () => {
+    const rows = parseFinancialCsv('company,Revenue,Expenses,costAndExpenses,grossProfit\nExact,900000000000.0003,0.0001,9.000000000000003e11,-900000000000.0003\n');
+    expect(JSON.parse(JSON.stringify(rows))).toEqual([{
+      company: 'Exact', Revenue: '900000000000.0003', Expenses: '0.0001',
+      costAndExpenses: '900000000000.0003', grossProfit: '-900000000000.0003',
+    }]);
+  });
+  it('canonicalizes signs and insignificant zeros without rounding', () => {
+    expect(parseFinancialCsv('company,Revenue,Expenses,grossProfit\nA,+001.2300,-0.0000,.00010\n')).toEqual([
+      { company: 'A', Revenue: '1.23', Expenses: '0', grossProfit: '0.0001' },
+    ]);
+  });
   it('rejects oversized batches before any request can be sent', () => {
     expect(() => parseFinancialCsv('company,Revenue,Expenses\n' + 'A,1,2\n'.repeat(1001))).toThrow('1,000');
   });
@@ -35,6 +50,12 @@ describe('financial statements', () => {
     expect(numeric('Infinity')).toBe(null);
     expect(numeric('   ')).toBe(null);
     expect(formatAmount(123.4567)).toBe('123.4567');
+    expect(formatAmount('900000000000.0003')).toBe('900,000,000,000.0003');
+    expect(formatAmount('-900000000000.0003')).toBe('-900,000,000,000.0003');
+    expect(formatAmount('0.0001')).toBe('0.0001');
+    expect(formatAmount('-0.0000')).toBe('0');
+    expect(formatAmount('Infinity')).toBe('Not available');
+    expect(financialRows([{ date: '2019-12-31', revenue: '900000000000.0003' }])[0].revenue).toBe('900000000000.0003');
     expect(chartData([]).labels).toEqual([]);
   });
 });

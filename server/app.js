@@ -44,7 +44,7 @@ function createApp() {
     if (req.method === 'POST' && !['/api/logout', '/api/guest-login', '/api/test'].includes(req.path) && !req.is('application/json')) throw new HttpError(415, 'Use application/json.', 'UNSUPPORTED_MEDIA_TYPE');
     next();
   });
-  app.use(express.json({ limit: '1mb', strict: true }));
+  app.use(express.json({ limit: '1mb', strict: true, reviver: require('./lib/decimal').financialJsonReviver }));
   app.use(cookieParser());
   app.use(require('./routes/auth'));
   app.use(require('./routes/data'));

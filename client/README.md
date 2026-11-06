@@ -12,7 +12,7 @@ Use Node 26.x. Copy `.env.example` to `.env.local`, run `npm ci`, then `npm run 
 
 - `/explore` lists companies and available years from the API. Company pages sort reporting dates and filter calendar years, preserve missing metrics, label synthetic demo data, and provide a numeric table alongside the charts.
 - `/register` and `/login` submit labeled forms. Browser authentication uses an HttpOnly cookie. Session state and the CSRF token stay in memory; no bearer token is persisted. Reload and window focus recheck the session. Logout revokes it on the server.
-- `/my-data` requires an account. CSV imports accept 1–1,000 rows up to 1 MB, validate the API column schema and numerical bounds, then save the batch. Paginated rows can be charted, exported, and deleted. Guest accounts are read-only. Charts show the current page, not a total across all saved records.
+- `/my-data` requires an account. CSV imports accept 1–1,000 rows up to 1 MB, validate the API column schema and numerical bounds, then save the batch. Paginated rows can be charted, exported, and deleted. Guest accounts are read-only. Charts show the current page, not a total across all saved records. CSV amounts remain decimal strings through import and table rendering so all supported digits survive an export/reimport round trip; only canvas plotting converts amounts to approximate JavaScript numbers.
 - Registration does not automatically sign in. A registration success takes the user to the login page.
 
 ## Verification

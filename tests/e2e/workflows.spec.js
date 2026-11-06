@@ -52,19 +52,24 @@ test('CSV import, persistence, export and deletion round trip through the real A
   const company = `BrowserCo_${Date.now()}`;
   await page.getByLabel('Upload CSV', { exact: true }).setInputFiles({
     name: 'financials.csv', mimeType: 'text/csv',
-    buffer: Buffer.from(`company,Revenue,Expenses,costAndExpenses,grossProfit\n${company},1000,200,400,600\n`),
+    buffer: Buffer.from(`company,Revenue,Expenses\n${company},900000000000.0003,0.0001\n`),
   });
   await page.getByRole('button', { name: 'Import data', exact: true }).click();
   await expect(page.getByRole('cell', { name: company, exact: true })).toBeVisible();
   await page.reload();
   await expect(page.getByRole('cell', { name: company, exact: true })).toBeVisible();
+  await expect(page.getByRole('cell', { name: '900,000,000,000.0003', exact: true })).toBeVisible();
+  await expect(page.getByRole('cell', { name: '900,000,000,000.0002', exact: true })).toBeVisible();
   const downloadEvent = page.waitForEvent('download');
   await page.getByRole('link', { name: 'Download CSV', exact: true }).click();
   const download = await downloadEvent;
   expect(download.suggestedFilename()).toMatch(/\.csv$/);
   const chunks = [];
   for await (const chunk of await download.createReadStream()) chunks.push(chunk);
-  expect(Buffer.concat(chunks).toString()).toContain(company);
+  const exported = Buffer.concat(chunks).toString();
+  expect(exported).toContain(company);
+  expect(exported).toContain('900000000000.0003');
+  expect(exported).toContain('900000000000.0002');
   page.on('dialog', dialog => dialog.accept());
   await page.getByRole('button', { name: `Delete ${company}`, exact: true }).click();
   await expect(page.getByRole('cell', { name: company, exact: true })).toHaveCount(0);

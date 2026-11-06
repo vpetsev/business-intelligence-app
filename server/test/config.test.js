@@ -28,7 +28,7 @@ test('financial and password boundary validation rejects unrepresentable exports
   for (const password of [' '.repeat(12), '😀'.repeat(6), '😀'.repeat(19)]) assert.throws(() => parse(registration, { username: 'boundary', password }));
   assert.equal(parse(registration, { username: ' Boundary ', password: 'long-enough-password' }).username, 'boundary');
   for (const body of [[{ company: 'Example', Revenue: 1.00001, Expenses: 0 }], [{ company: 'Example', Revenue: 999999999999, Expenses: -1 }]]) assert.throws(() => parse(rows, body));
-  assert.equal(parse(rows, [{ company: 'Example', Revenue: -999999999999, Expenses: 0 }])[0].Revenue, -999999999999);
+  assert.equal(parse(rows, [{ company: 'Example', Revenue: -999999999999, Expenses: 0 }])[0].Revenue, '-999999999999');
 });
 
 test('database URLs cannot override strict TLS verification', async () => {

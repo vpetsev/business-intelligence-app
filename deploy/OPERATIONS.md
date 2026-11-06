@@ -6,6 +6,27 @@ Record the deployed commit, image digest, migration state and environment owner
 for each deployment. The Docker files accept a `NODE_IMAGE` build argument so a
 reviewed base-image digest can be pinned by the release pipeline.
 
+## Deployment TODO: hosting deferred
+
+Hosted API and database provisioning are intentionally deferred. Neither has
+been provisioned as part of this work. The client deployment alone does not run
+the Express API or provide PostgreSQL storage.
+
+- [ ] Choose hosting for the API and persistent PostgreSQL, with separate preview
+  and production environments, runtime secrets, TLS and backups.
+- [ ] Deploy the reviewed API image with the production settings below and run
+  `npm run migrate` as a release task. Follow the recovery guidance before
+  upgrading an existing database. Run `npm run seed` only if synthetic sample
+  charts are desired.
+- [ ] Verify API `/health/ready` returns 200 and smoke-test its authentication and
+  data operations against the intended database.
+- [ ] Set the Vercel client's server-only `BACKEND_URL` to that verified HTTPS
+  API origin, rebuild/redeploy with Node 26, and verify the same flows through
+  `/api/backend/*`, including login, CSV import/export, deletion and logout.
+
+Do not use the local `http://127.0.0.1:3001` fallback for a hosted client. Changing
+`BACKEND_URL` after a build does not update that build's rewrite destination.
+
 ## Deploy the client on Vercel
 
 Import this GitHub repository and set **Root Directory** to `client`, framework
@@ -70,6 +91,23 @@ readiness. Drain connections and allow graceful termination during replacement.
 Capture HTTP status/error rates and readiness failures without logging passwords,
 cookies, Authorization headers or CSV bodies. The built-in process-local rate
 limits need a shared store or an upstream limiter before horizontally scaling.
+
+### Proxy trust and rate limits
+
+Local Compose deliberately keeps `TRUST_PROXY_HOPS=0`. Requests forwarded by
+Next share the proxy's rate-limit bucket; this is a local development limitation.
+Do not change the value to 1 merely to separate those requests: self-hosted Next
+preserves a supplied `X-Forwarded-For`, so trusting it can let callers choose
+their apparent IP and evade rate limits.
+
+Before enabling proxy trust in production, map every path to the API and ensure
+the trusted ingress replaces untrusted forwarding headers. With the current
+numeric setting, every reachable path must have the verified proxy chain; a
+shorter direct path can make caller-supplied addresses trusted. Headers arriving
+through a Vercel frontend do not by themselves authenticate requests to a
+separately reachable API. Verify normal and forged-header requests at the chosen
+ingress, and enforce per-client limits at a trusted gateway until that chain is
+established. [Express proxy guidance](https://expressjs.com/en/guide/behind-proxies/)
 
 ## Back up and verify recovery
 

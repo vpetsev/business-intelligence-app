@@ -26,7 +26,7 @@ it('validates CSV before sending and updates the table after successful import a
   // jsdom cannot validate the native file picker; the browser E2E test covers its submit action.
   fireEvent.submit(screen.getByRole('button', { name: 'Import data' }).closest('form'));
   expect(await screen.findByRole('cell', { name: 'Example' })).toBeVisible();
-  expect(request).toHaveBeenCalledWith('/api/data', { method: 'POST', body: [{ company: 'Example', Revenue: 100, Expenses: 25 }] });
+  expect(request).toHaveBeenCalledWith('/api/data', { method: 'POST', body: [{ company: 'Example', Revenue: '100', Expenses: '25' }] });
   expect(screen.getByRole('link', { name: 'Download CSV', exact: true })).toHaveAttribute('href', '/api/backend/api/data/export');
   await user.click(screen.getByRole('button', { name: 'Delete Example' }));
   await waitFor(() => expect(screen.queryByRole('cell', { name: 'Example' })).toBeNull());
@@ -43,4 +43,13 @@ it('reports invalid CSV without sending an import request', async () => {
   fireEvent.submit(screen.getByRole('button', { name: 'Import data' }).closest('form'));
   expect(await screen.findByRole('alert')).toHaveTextContent('finite number');
   expect(request.mock.calls.every(([, options]) => !options?.method)).toBe(true);
+});
+
+it('renders exact server decimals in the table while preserving all four places', async () => {
+  const request = vi.fn().mockResolvedValue({ rows: [{ id: 8, company: 'Exact', revenue: '900000000000.0003', expenses: '0.0001', cost_expenses: '0.0001', gross_profit: '900000000000.0002' }], total: 1 });
+  useSession.mockReturnValue({ user: { id: 1, username: 'alice' }, request });
+  render(<SavedData />);
+  expect(await screen.findByRole('cell', { name: '900,000,000,000.0003', exact: true })).toBeVisible();
+  expect(screen.getByRole('cell', { name: '900,000,000,000.0002', exact: true })).toBeVisible();
+  expect(screen.getAllByRole('cell', { name: '0.0001', exact: true })).toHaveLength(2);
 });
