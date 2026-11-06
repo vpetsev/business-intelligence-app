@@ -1,0 +1,29 @@
+{
+  "name": "business-intelligence-app-tooling",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Repository orchestration and end-to-end tests; client and server install independently.",
+  "engines": {
+    "node": "26.x",
+    "npm": ">=10"
+  },
+  "scripts": {
+    "setup": "npm ci --prefix server && npm ci --prefix client",
+    "dev:api": "npm run dev --prefix server",
+    "dev:client": "npm run dev --prefix client",
+    "start:api": "npm start --prefix server",
+    "start:client": "npm start --prefix client",
+    "db:migrate": "npm run migrate --prefix server",
+    "db:seed": "npm run seed --prefix server",
+    "test:api": "npm test --prefix server",
+    "test:client": "npm test --prefix client",
+    "test": "npm run test:api && npm run test:client",
+    "build": "npm run build --prefix client",
+    "test:e2e": "playwright test",
+    "test:e2e:report": "playwright show-report"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.14.0",
+    "@playwright/test": "1.65.0"
+  }
+}

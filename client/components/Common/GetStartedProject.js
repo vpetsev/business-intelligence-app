@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Link from 'next/link';
 
 class GetStartedProject extends Component {
     render() {
@@ -13,14 +14,14 @@ class GetStartedProject extends Component {
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices Lorem Ipsum is simply dummy text.</p>
 
                                 <div className="productive-btn">
-                                    <a className="productive-btn" href="/projects">
-                                        Get Started Project 
+                                    <Link className="productive-btn" href="/projects">
+                                        Get Started Project
                                         <span></span>
-                                    </a>
-                                    <a href="/contact" className="productive-btn-one">
+                                    </Link>
+                                    <Link href="/contact" className="productive-btn-one">
                                         Contact With Us
                                         <span></span>
-                                    </a>
+                                    </Link>
                                 </div>
                             </div>
                         </div>

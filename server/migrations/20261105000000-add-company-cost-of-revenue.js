@@ -1,12 +1,12 @@
 'use strict';
 module.exports = {
-  async up(queryInterface, Sequelize) {
-    const columns = await queryInterface.describeTable('Companies');
+  async up(queryInterface, Sequelize, options = {}) {
+    const columns = await queryInterface.describeTable('Companies', options);
     if (!columns.costOfRevenue) {
-      await queryInterface.addColumn('Companies', 'costOfRevenue', { type: Sequelize.BIGINT });
+      await queryInterface.addColumn('Companies', 'costOfRevenue', { type: Sequelize.BIGINT }, options);
     }
   },
-  async down(queryInterface) {
-    await queryInterface.removeColumn('Companies', 'costOfRevenue');
+  async down(queryInterface, Sequelize, options = {}) {
+    await queryInterface.removeColumn('Companies', 'costOfRevenue', options);
   },
 };

@@ -14,6 +14,21 @@
 
 # misc
 .DS_Store
+
+# Local credentials, build output and test artifacts at every package level.
+**/.env
+**/.env.*
+!**/.env.example
+**/.next/
+**/node_modules/
+**/coverage/
+**/.DS_Store
+/playwright-report/
+/test-results/
+/blob-report/
+/backups/
+/work/
+/outputs/
 .env.local
 .env.development.local
 .env.test.local

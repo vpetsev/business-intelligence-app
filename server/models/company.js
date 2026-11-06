@@ -4,6 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     "Company",
     {
       symbol: DataTypes.STRING,
+      source: DataTypes.STRING,
       date: DataTypes.STRING,
       revenue: DataTypes.BIGINT,
       costAndExpenses: DataTypes.BIGINT,

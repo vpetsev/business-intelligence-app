@@ -18,22 +18,22 @@ class TeamMember extends Component {
                   <img src="/images/team/team1.jpg" alt="team" />
 
                   <div className="team-social">
-                    <Link href="//linkedin.com/in/david-c-48287133/">
-                      <a target="_blank">
-                        <i className="fab fa-linkedin"></i>
-                      </a>
+                    <Link href="https://linkedin.com/in/david-c-48287133/" target="_blank" rel="noopener noreferrer">
+
+                        <span className="sr-only">LinkedIn profile</span><i className="fab fa-linkedin" aria-hidden="true"></i>
+
                     </Link>
 
-                    <Link href="//github.com/dbc257">
-                      <a target="_blank">
-                        <i className="fab fa-github"></i>
-                      </a>
+                    <Link href="https://github.com/dbc257" target="_blank" rel="noopener noreferrer">
+
+                        <span className="sr-only">GitHub profile</span><i className="fab fa-github" aria-hidden="true"></i>
+
                     </Link>
 
-                    <Link href="//davidcarlisle.me">
-                      <a target="_blank">
-                        <i className="fa fa-link"></i>
-                      </a>
+                    <Link href="https://davidcarlisle.me" target="_blank" rel="noopener noreferrer">
+
+                        <span className="sr-only">Personal website</span><i className="fa fa-link" aria-hidden="true"></i>
+
                     </Link>
                   </div>
                 </div>
@@ -51,22 +51,22 @@ class TeamMember extends Component {
                   <img src="/images/team/team2.jpg" alt="team" />
 
                   <div className="team-social">
-                    <Link href="//linkedin.com/in/victorpetsev/">
-                      <a target="_blank">
-                        <i className="fab fa-linkedin"></i>
-                      </a>
+                    <Link href="https://linkedin.com/in/victorpetsev/" target="_blank" rel="noopener noreferrer">
+
+                        <span className="sr-only">LinkedIn profile</span><i className="fab fa-linkedin" aria-hidden="true"></i>
+
                     </Link>
 
-                    <Link href="//github.com/VPetsev/">
-                      <a target="_blank">
-                        <i className="fab fa-github"></i>
-                      </a>
+                    <Link href="https://github.com/VPetsev/" target="_blank" rel="noopener noreferrer">
+
+                        <span className="sr-only">GitHub profile</span><i className="fab fa-github" aria-hidden="true"></i>
+
                     </Link>
 
-                    <Link href="//vpetsev.com">
-                      <a target="_blank">
-                        <i className="fa fa-link"></i>
-                      </a>
+                    <Link href="https://vpetsev.com" target="_blank" rel="noopener noreferrer">
+
+                        <span className="sr-only">Personal website</span><i className="fa fa-link" aria-hidden="true"></i>
+
                     </Link>
                   </div>
                 </div>
@@ -84,21 +84,21 @@ class TeamMember extends Component {
                   <img src="/images/team/team3.jpg" alt="team" />
 
                   <div className="team-social">
-                    <Link href="//linkedin.com/in/travis-wright-43706b41/">
-                      <a target="_blank">
-                        <i className="fab fa-linkedin"></i>
+                    <Link href="https://linkedin.com/in/travis-wright-43706b41/">
+                      <a target="_blank" rel="noopener noreferrer">
+                        <span className="sr-only">LinkedIn profile</span><i className="fab fa-linkedin" aria-hidden="true"></i>
                       </a>
                     </Link>
 
-                    <Link href="//github.com/sivart-wright">
-                      <a target="_blank">
-                        <i className="fab fa-github"></i>
+                    <Link href="https://github.com/sivart-wright">
+                      <a target="_blank" rel="noopener noreferrer">
+                        <span className="sr-only">GitHub profile</span><i className="fab fa-github" aria-hidden="true"></i>
                       </a>
                     </Link>
 
-                    <Link href="//sivart-wright.github.io/portfolio_/">
-                      <a target="_blank">
-                        <i className="fa fa-link"></i>
+                    <Link href="https://sivart-wright.github.io/portfolio_/">
+                      <a target="_blank" rel="noopener noreferrer">
+                        <span className="sr-only">Personal website</span><i className="fa fa-link" aria-hidden="true"></i>
                       </a>
                     </Link>
                   </div>

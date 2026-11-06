@@ -1,0 +1,54 @@
+/* Product controls complement the original BI App assets and typography. */
+:root { --bi-primary: #4232a3; --bi-ink: #20213a; }
+body { color: var(--bi-ink); }
+a { color: #40308f; }
+button, input, select, textarea { font: inherit; }
+:focus-visible { outline: 3px solid #da8c00 !important; outline-offset: 4px; }
+.skip-link { position: fixed; top: -100px; left: 16px; z-index: 9999; padding: 12px; background: white; color: #20213a; }
+.skip-link:focus { top: 12px; }
+.app-header { background: #29235c; position: relative; z-index: 50; color: white; }
+.app-nav { display: flex; align-items: center; justify-content: space-between; min-height: 80px; gap: 24px; }
+.app-brand { display: flex; align-items: center; gap: 10px; color: white; font-size: 24px; font-weight: 700; white-space: nowrap; }
+.app-brand:hover { color: white; }
+.app-nav-links { display: flex; align-items: center; gap: 24px; list-style: none; margin: 0; padding: 0; }
+.app-nav-links a, .app-nav-links button { color: white; background: none; border: 0; padding: 8px 0; }
+.app-nav-links [aria-current=page] { text-decoration: underline; text-underline-offset: 6px; }
+.nav-toggle { display: none; background: transparent; color: white; border: 1px solid white; border-radius: 4px; padding: 7px 14px; }
+.app-main { min-height: 65vh; padding-top: 48px; padding-bottom: 72px; }
+.app-main h1 { margin-bottom: 24px; font-size: clamp(2rem, 5vw, 3rem); }
+.app-main h2 { margin-top: 32px; font-size: 1.5rem; }
+.app-form-panel { max-width: 560px; }
+.app-form-panel label, .upload-form label { display: block; font-weight: 600; margin-top: 20px; margin-bottom: 6px; }
+.form-control { background: #fff; border: 1px solid #737386; color: #20213a; }
+.app-button { display: inline-block; border: 1px solid var(--bi-primary); border-radius: 5px; background: var(--bi-primary); color: white; padding: 10px 20px; margin: 20px 8px 20px 0; }
+.app-button:hover { color: white; background: #302279; }
+button:disabled { cursor: not-allowed; opacity: .65; }
+.app-error { color: #a01429; background: #fff4f4; padding: 12px; border-left: 4px solid #a01429; margin: 16px 0; }
+.app-notice { padding: 16px; background: #eeedf8; border-left: 4px solid #6254b5; }
+.field-help { font-size: .9rem; color: #4e4e61; margin-top: 6px; }
+.app-table-wrapper { overflow-x: auto; margin: 24px 0; }
+.app-table { border-collapse: collapse; width: 100%; }
+.app-table caption { caption-side: top; color: #34344b; }
+.app-table th, .app-table td { padding: 12px; text-align: left; border-bottom: 1px solid #d9d9e4; white-space: nowrap; }
+.app-table th { background: #eeedf8; }
+.app-table button { border: 1px solid #a01429; background: white; color: #a01429; padding: 5px 10px; border-radius: 3px; }
+.chart-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; margin: 24px 0; }
+.chart-panel { position: relative; height: 340px; min-width: 0; }
+.year-filter { margin: 20px 0; display: flex; gap: 12px; align-items: center; }
+.year-filter select { padding: 8px; background: white; border: 1px solid #737386; border-radius: 4px; }
+.company-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin: 24px 0; }
+.company-card { border: 1px solid #dedcea; border-radius: 8px; padding: 24px; background: #f9f8ff; }
+.company-card h2 { margin-top: 0; }
+.pagination { gap: 12px; align-items: center; flex-wrap: wrap; }
+.pagination button { padding: 8px 16px; border: 1px solid #737386; background: white; border-radius: 4px; }
+.main-banner-four { padding-top: 70px; }
+@media (max-width: 767px) {
+ .app-nav { flex-wrap: wrap; padding-top: 12px; padding-bottom: 12px; }
+ .nav-toggle { display: block; }
+ .app-nav-links { display: none; width: 100%; flex-direction: column; align-items: stretch; gap: 8px; }
+ .app-nav-links.is-open { display: flex; }
+ .app-nav-links a, .app-nav-links button { display: block; width: 100%; text-align: left; padding: 10px; }
+ .chart-grid, .company-grid { grid-template-columns: 1fr; }
+ .app-main { padding-top: 32px; }
+}
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }

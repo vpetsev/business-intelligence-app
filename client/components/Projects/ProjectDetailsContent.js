@@ -13,7 +13,7 @@ class ProjectDetailsContent extends Component {
                     <div className="projects-details-desc">
                         <h3>We Provide Useful Services</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                        
+
                         <div className="features-text">
                             <h4>Core Development</h4>
                             <p>No fake products and services. The customer is king, their lives and needs are the inspiration. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.</p>
@@ -48,39 +48,39 @@ class ProjectDetailsContent extends Component {
                                 <h4>Share</h4>
                                 <ul className="social">
                                     <li>
-                                        <Link href="#">
-                                            <a target="_blank">
+                                        <Link href="#" target="_blank">
+
                                                 <i className="fab fa-facebook-f"></i>
-                                            </a>
+
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link href="#">
-                                            <a target="_blank">
+                                        <Link href="#" target="_blank">
+
                                                 <i className="fab fa-twitter"></i>
-                                            </a>
+
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link href="#">
-                                            <a target="_blank">
+                                        <Link href="#" target="_blank">
+
                                                 <i className="fab fa-instagram"></i>
-                                            </a>
+
                                         </Link>
                                     </li>
                                     <li>
-                                        <Link href="#">
-                                            <a target="_blank">
+                                        <Link href="#" target="_blank">
+
                                                 <i className="fab fa-linkedin-in"></i>
-                                            </a>
+
                                         </Link>
                                     </li>
                                 </ul>
                             </div>
 
                             <div className="single-info-box">
-                                <Link href="#">
-                                    <a className="default-btn">Live Preview</a>
+                                <Link href="#" className="default-btn">
+                                    Live Preview
                                 </Link>
                             </div>
                         </div>

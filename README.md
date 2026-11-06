@@ -1,144 +1,173 @@
-# business-intelligence-app
+# Business Intelligence App
 
-## :chart_with_upwards_trend: :bar_chart: BUSINESS INTELLIGENCE APP :bar_chart: :chart_with_downwards_trend:
+A Next.js client and Express/PostgreSQL API for exploring sample company data and
+managing a signed-in user's own CSV imports. The client and server are separate
+applications with independent npm lockfiles; the root package only orchestrates
+commands and browser tests.
 
-The Business Intelligence (BI) App enables users to access business information via two categories: analysis, such as online analytical processing (OLAP), and information delivery, such as dashboards.
+## Supported baseline
 
-## Live Link
+- Node.js 26 LTS and its bundled npm.
+- PostgreSQL 16 for the supported local/CI database baseline.
+- Docker Engine/Desktop with Compose v2 for the container quickstart, or an
+  independently managed PostgreSQL instance for native development.
+- Chromium for the Playwright end-to-end and accessibility checks.
 
-[Business Intelligence Application](https://bi-app.vercel.app/)
+The repository includes CI configuration, but a file in Git does not prove a
+successful CI or production deployment. Check the Actions run for the exact
+commit you plan to deploy. No old demo URL is treated as a supported deployment.
 
-## This site was built by:
+## Quickstart with local containers
 
-- [Victor Petsev](https://github.com/VPetsev)
-- [David Carlisle](https://github.com/dbc257)
-
-
-## Summary
-
-- :star: [Website Link](#website-link)
-- :star: [Screenshots](#screenshots)
-- :star: [Videos](#videos)
-- :star: [Getting Started](#getting-started)
-- :star: [Prerequisites](#prerequisites)
-- :star: [Installing](#installing)
-- :star: [Built With](#built-with)
-- :star: [Contributors](#contributors)
-
-## Website-Link
-
-[Business Intelligence App](https://business-intelligence-app.vercel.app/)
-
-## Screenshots
-
-<!-- ![Screen Shot 2020-07-22 at 9 05 12 PM](https://user-images.githubusercontent.com/62611599/88332622-75e12f80-ccf4-11ea-816e-9af2c7a0b3bf.png) -->
-<img width="1425" alt="Home Page" src="https://user-images.githubusercontent.com/62611599/88332622-75e12f80-ccf4-11ea-816e-9af2c7a0b3bf.png">
-
-<!-- ![Screen Shot 2020-07-23 at 2 28 48 PM](https://user-images.githubusercontent.com/62611599/88334193-06207400-ccf7-11ea-870a-590d5439081a.png) -->
-
-<img width="1425" alt="About Us Page" src="https://user-images.githubusercontent.com/62611599/88334193-06207400-ccf7-11ea-870a-590d5439081a.png">
-
-<!-- ![Screen Shot 2020-07-23 at 2 29 20 PM](https://user-images.githubusercontent.com/62611599/88334443-66171a80-ccf7-11ea-8d9d-b57ae26618bb.png) -->
-
-<img width="1425" alt="Login Page" src="https://user-images.githubusercontent.com/62611599/88334443-66171a80-ccf7-11ea-8d9d-b57ae26618bb.png">
-
-<!-- ![Screen Shot 2020-07-23 at 2 29 35 PM](https://user-images.githubusercontent.com/62611599/88334595-a24a7b00-ccf7-11ea-97bd-01b9b5ad7bfb.png) -->
-
-<img width="1425" alt="Registration Page" src="https://user-images.githubusercontent.com/62611599/88334595-a24a7b00-ccf7-11ea-97bd-01b9b5ad7bfb.png">
-
-<!-- ![Screen Shot 2020-07-23 at 2 29 54 PM](https://user-images.githubusercontent.com/62611599/88334724-d160ec80-ccf7-11ea-82c3-8811ad7b827f.png) -->
-
-<img width="1425" alt="Explore Page" src="https://user-images.githubusercontent.com/62611599/88334724-d160ec80-ccf7-11ea-82c3-8811ad7b827f.png">
-
-<!-- ![Screen Shot 2020-07-23 at 2 31 07 PM](https://user-images.githubusercontent.com/62611599/88334998-3a486480-ccf8-11ea-9d86-fe57c1b0b18f.png) -->
-
-<img width="1425" alt="Apple, Inc. Chart" src="https://user-images.githubusercontent.com/62611599/88334998-3a486480-ccf8-11ea-9d86-fe57c1b0b18f.png">
-
-<!-- ![Screen Shot 2020-07-23 at 2 36 20 PM](https://user-images.githubusercontent.com/62611599/88335216-8bf0ef00-ccf8-11ea-968d-ef5050d67e7f.png) -->
-
-<img width="236" alt="Login Page on Mobile Device" src="https://user-images.githubusercontent.com/62611599/88335216-8bf0ef00-ccf8-11ea-968d-ef5050d67e7f.png">
-
-## Videos
-
-# ![Screen-Recording-2020-07-23-at-1](https://user-images.githubusercontent.com/59983319/88329444-93f86100-ccef-11ea-9c27-8d26ee5b4c75.gif)
-
-## Getting-Started
-
-Feel free to fork the project and change it to your likings. Try it out by cloning the repo to your local machine or download the zip.
-
-## Prerequisites
-
-You need preferably the latest version of Chrome, and text editor.
-
-#### Go here for Chrome: https://www.google.com/chrome/
-
-#### VSCode is my go to: https://code.visualstudio.com/
-
-## Installing
-
-To get started follow this guide:
-ON LINUX/UNIX
-
-# FOR DEVELOPMENT PURPOSES
-
-In your terminal clone repo to your local machine using git clone:
-
-```
-git clone git@github.com:dbc257/business-intelligence-app.git
-```
-
-Move to your newly cloned repo by entering the following in your terminal:
-
-```
-$ cd business-intelligence-app && npm install
-```
-
-To open all project files from terminal using VSCode just tpye and enter:
-
-```
-$ code .
-```
-
-## Built With
-
-- React.js
-- Next.js
-- Redux
-- react-chartsjs-2
-- Syntactically Awesome Style Sheets (Sass)
-- Cascading Style Sheets (CSS)
-- JSON Web Tokens
-- bCrypt.js
-- Node.js
-- PostgreSQL
-- ElephantSQL
-
-## Contributors
-
-- **David Carlisle**
-- **Victor Petsev**
-
-
-## Local configuration and regression tests
-
-Use an isolated PostgreSQL database. The committed configuration contains no database passwords; `server/config/config.js` reads `DATABASE_URL` or the `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, and `DB_PASSWORD` environment variables. Production requires `DATABASE_URL`. Previously committed credentials must be rotated by the database owner; deleting them from the current tree cannot revoke copies or remove Git history.
-
-From `server`, install dependencies, copy `.env.example` to `.env`, set a strong random `JWT_PASSWORD`, configure the database, and run:
+From the repository root:
 
 ```sh
-npm install
-npx sequelize-cli@5 db:migrate
-npm start
+node deploy/init-local-env.cjs
+docker compose up --build --detach --wait
+docker compose run --rm api npm run seed
 ```
 
-The API listens on port 3001 (override with `PORT`). Guest login is disabled unless `REACT_APP_USERNAME` and `REACT_APP_PASSWORD` identify an existing account. User and guest tokens share the required signing key, include the user ID, and expire after one hour. Saved data reads/uploads require a Bearer token; callers may only access their own user ID. Existing rows with a null owner cannot be reliably attributed automatically and need separate recovery if their ownership is known.
+The first command creates fresh local database/signing secrets in an ignored
+`.env` with restrictive file permissions and refuses to overwrite an existing
+file. Compose waits for PostgreSQL, applies migrations in a one-shot service,
+then starts the API and production-built client. The API uses development
+configuration for local HTTP; production deployments use stricter HTTPS settings.
+Open http://localhost:3000 and register a new account; no shared/default password
+is installed. If you change `WEB_PORT`, update `CORS_ORIGINS` to that exact client
+origin as well.
 
-From `client`, configure `NEXT_PUBLIC_API_BASE_URL` (default `http://localhost:3001`) before starting or building Next, then run `npm install` and `npm run dev`. On Node 22, this legacy Next 9 build also needs `NODE_OPTIONS=--openssl-legacy-provider`. API URL changes require restarting/rebuilding Next.
+The API is at http://localhost:3001; readiness is `/health/ready`. All published
+ports bind only to the local machine. `docker compose logs --follow api client`
+shows service logs. `docker compose down` stops the services while retaining the
+named database volume. Changing `POSTGRES_PASSWORD` after a volume was initialized
+does not rotate the database role's password; use the operator rotation procedure.
 
-The regression suite requires Node 18+ and a fresh, empty PostgreSQL database. It refuses an existing schema and never drops user data. From `server`:
+The Compose configuration is for local HTTP. Production requires HTTPS, Secure
+cookies, managed secrets and appropriate database/proxy settings; see
+[deployment and recovery](deploy/OPERATIONS.md).
+
+## Native development
 
 ```sh
-TEST_DATABASE_URL=postgres://postgres@127.0.0.1:5432/bi_test npm test
+nvm use
+npm ci
+npm run setup
+cp -n server/.env.example server/.env
+cp -n client/.env.example client/.env.local
 ```
 
-Tests apply all migrations and exercise real HTTP login failures, valid/invalid/expired tokens, guest identity, cross-user denial, CSV ownership and completed responses, and database-error responses. The new company migration supplies the column already used by the chart model. A misspelled association is corrected without introducing a second `UserId` column.
+Create a dedicated local PostgreSQL database, then edit `server/.env` using the
+[server environment reference](server/README.md). Set its database connection and
+a fresh random `JWT_PASSWORD` of at least 32 bytes. Configure `CORS_ORIGINS` for
+`http://localhost:3000`; use non-Secure cookies only for local HTTP. Set the
+server-only client `BACKEND_URL=http://127.0.0.1:3001` in `client/.env.local`.
+Never copy production credentials into this workspace.
+
+```sh
+npm run db:migrate
+npm run db:seed
+npm run dev:api
+```
+
+In another terminal from the repository root:
+
+```sh
+npm run dev:client
+```
+
+The native client and API use ports 3000 and 3001. The seed command adds sample
+company rows idempotently; account seeding is optional and explicitly configured.
+The browser uses `/api/backend/...` on the client's origin, and Next proxies that
+path to the API. `BACKEND_URL` is used when building the rewrite, so restart the
+development server or rebuild the production client after changing it.
+
+## Data flow and CSV contract
+
+1. Register/sign in through the client; the API issues an HttpOnly session cookie.
+2. Upload a UTF-8 CSV through the authenticated dashboard. The client parses and
+   validates it; the API independently validates every row and owns the final check.
+3. The API takes ownership from the authenticated account, saves rows in
+   PostgreSQL, and returns completed results. Listing, exporting and deleting
+   imports are scoped to that same account.
+4. Public sample-company charts read a separate dataset. A private CSV import is
+   not automatically published as a public company chart.
+
+```csv
+company,Revenue,Expenses,costAndExpenses,grossProfit
+Example Company,1000.50,400.25,400.25,600.25
+Second Company,800,200,,
+```
+
+| Column | Contract |
+| --- | --- |
+| `company` | Required nonempty company name, at most 120 characters. |
+| `Revenue` | Required finite decimal value. Header is case-sensitive. |
+| `Expenses` | Required finite decimal value. Header is case-sensitive. |
+| `costAndExpenses` | Optional finite decimal; defaults to `Expenses` when omitted/blank. |
+| `grossProfit` | Optional finite decimal; defaults to `Revenue - Expenses` when omitted/blank. |
+
+An import contains 1–1,000 rows and must fit the API's 1 MiB JSON request limit
+(after CSV parsing). Numeric values must have at most four decimal places and be
+between -999,999,999,999 and 999,999,999,999. Do not include currency symbols or
+thousands separators in numeric cells. The interface displays amounts in USD;
+provide USD figures because no currency conversion is performed. The application
+does not infer an accounting policy. Check the saved table after import.
+Exact API responses, pagination and validation errors are documented in
+[server/README.md](server/README.md).
+
+## Validation
+
+```sh
+npm run lint --prefix client
+npm run test:client
+npm run build
+npm audit --include=dev --audit-level=moderate
+npm audit --prefix server --include=dev --audit-level=moderate
+npm audit --prefix client --include=dev --audit-level=moderate
+```
+
+The API suite requires a **fresh empty, disposable PostgreSQL database** and
+refuses a populated schema. Configure `TEST_DATABASE_URL` through your local
+environment, then run `npm run test:api`. It applies real migrations and performs HTTP/database
+regressions; it is not a mocked SQL test. Use a new disposable database for each
+API run, never the application or production database.
+
+For browser tests, use a different dedicated database:
+
+```sh
+# Set E2E_DATABASE_URL to your separate disposable PostgreSQL database first.
+NODE_ENV=test TEST_DATABASE_URL="$E2E_DATABASE_URL" DATABASE_URL="$E2E_DATABASE_URL" npm run db:migrate
+NODE_ENV=test TEST_DATABASE_URL="$E2E_DATABASE_URL" DATABASE_URL="$E2E_DATABASE_URL" npm run db:seed
+BACKEND_URL=http://127.0.0.1:8321 npm run build
+npx --no-install playwright install chromium
+npm run test:e2e
+```
+
+Playwright starts the API on port 8321 and the production client on port 8320.
+Its database is distinct from the empty-database regression suite. Browser and
+accessibility diagnostics are written to ignored `playwright-report/` and
+`test-results/` directories. Use `npm run test:e2e:report` to inspect a report.
+
+The **Quality** workflow installs all three lockfiles, checks repository hygiene,
+audits production/development dependencies for moderate-or-higher advisories,
+runs API tests against PostgreSQL 16, runs client lint/tests/build, applies migrations
+and seeds twice on a separate E2E database, and runs browser/accessibility tests.
+A separate job builds Compose images and checks service readiness. GitHub-hosted
+PostgreSQL services and Playwright browser installation follow their official
+[GitHub](https://docs.github.com/en/actions/tutorials/use-containerized-services/create-postgresql-service-containers)
+and [Playwright](https://playwright.dev/docs/ci-intro) guidance. Require passing
+checks in branch protection after the workflow has run successfully.
+
+## Deploy and maintain
+
+- [Deployment, backups, credential rotation and legacy-owner recovery](deploy/OPERATIONS.md)
+- [Security policy and reporting](SECURITY.md)
+- [API configuration and behavior](server/README.md)
+
+Environment files, installed dependencies, generated Next output, backups and
+browser traces are not source artifacts. Preserve lockfiles and the retained
+public theme assets; do not commit local build outputs. Dependabot configuration
+proposes dependency and GitHub Action updates; review and test those changes
+before merging them.
+
+Original application by Victor Petsev and David Carlisle.

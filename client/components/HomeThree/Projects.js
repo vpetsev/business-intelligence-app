@@ -17,12 +17,12 @@ class Projects extends Component {
                                 <div className="project-image">
                                     <img src="/images/projects/project1.png" alt="image" />
                                 </div>
-            
+
                                 <div className="image-hover">
                                     <div className="text">
                                         <h3>
                                             <Link href="/project-details">
-                                                <a>Data is the new science big data holds the answer</a>
+                                                Data is the new science big data holds the answer
                                             </Link>
                                         </h3>
                                         <p>Data Analysis</p>
@@ -36,12 +36,12 @@ class Projects extends Component {
                                 <div className="project-image">
                                     <img src="/images/projects/project2.png" alt="image" />
                                 </div>
-            
+
                                 <div className="image-hover">
                                     <div className="text">
                                         <h3>
                                             <Link href="/project-details">
-                                                <a>Data is the new science big data holds the answer</a>
+                                                Data is the new science big data holds the answer
                                             </Link>
                                         </h3>
                                         <p>Business Intelligence</p>
@@ -55,12 +55,12 @@ class Projects extends Component {
                                 <div className="project-image">
                                     <img src="/images/projects/project3.png" alt="image" />
                                 </div>
-            
+
                                 <div className="image-hover">
                                     <div className="text">
                                         <h3>
                                             <Link href="/project-details">
-                                                <a>Data is the new science big data holds the answer</a>
+                                                Data is the new science big data holds the answer
                                             </Link>
                                         </h3>
                                         <p>Data Management</p>

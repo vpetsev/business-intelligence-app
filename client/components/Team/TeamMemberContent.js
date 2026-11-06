@@ -18,22 +18,22 @@ class TeamMemberContent extends Component {
                   <img src="/images/team/team1.jpg" alt="team" />
 
                   <div className="team-social">
-                    <Link href="#">
-                      <a target="_blank">
+                    <Link href="#" target="_blank">
+
                         <i className="fab fa-facebook-f"></i>
-                      </a>
+
                     </Link>
 
-                    <Link href="#">
-                      <a target="_blank">
+                    <Link href="#" target="_blank">
+
                         <i className="fab fa-twitter"></i>
-                      </a>
+
                     </Link>
 
-                    <Link href="#">
-                      <a target="_blank">
+                    <Link href="#" target="_blank">
+
                         <i className="fab fa-instagram"></i>
-                      </a>
+
                     </Link>
                   </div>
                 </div>
@@ -51,22 +51,22 @@ class TeamMemberContent extends Component {
                   <img src="/images/team/team2.jpg" alt="team" />
 
                   <div className="team-social">
-                    <Link href="#">
-                      <a target="_blank">
+                    <Link href="#" target="_blank">
+
                         <i className="fab fa-facebook-f"></i>
-                      </a>
+
                     </Link>
 
-                    <Link href="#">
-                      <a target="_blank">
+                    <Link href="#" target="_blank">
+
                         <i className="fab fa-twitter"></i>
-                      </a>
+
                     </Link>
 
-                    <Link href="#">
-                      <a target="_blank">
+                    <Link href="#" target="_blank">
+
                         <i className="fab fa-instagram"></i>
-                      </a>
+
                     </Link>
                   </div>
                 </div>
@@ -84,22 +84,22 @@ class TeamMemberContent extends Component {
                   <img src="/images/team/team3.jpg" alt="team" />
 
                   <div className="team-social">
-                    <Link href="#">
-                      <a target="_blank">
+                    <Link href="#" target="_blank">
+
                         <i className="fab fa-facebook-f"></i>
-                      </a>
+
                     </Link>
 
-                    <Link href="#">
-                      <a target="_blank">
+                    <Link href="#" target="_blank">
+
                         <i className="fab fa-twitter"></i>
-                      </a>
+
                     </Link>
 
-                    <Link href="#">
-                      <a target="_blank">
+                    <Link href="#" target="_blank">
+
                         <i className="fab fa-instagram"></i>
-                      </a>
+
                     </Link>
                   </div>
                 </div>

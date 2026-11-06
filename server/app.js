@@ -1,87 +1,70 @@
-require('dotenv').config();
 const express = require('express');
-const app = express();
+const helmet = require('helmet');
+const cors = require('cors');
+const cookieParser = require('cookie-parser');
+const { rateLimit } = require('express-rate-limit');
+const { randomUUID } = require('node:crypto');
 const models = require('./models');
-const auth = require('./middlewares/authMiddleware');
-const asyncHandler = require('./middlewares/asyncHandler');
-const tokens = require('./config/token');
-const bcrypt = require('bcryptjs');
-tokens.assertConfigured();
-
-app.use(require('cors')());
-app.use(express.json());
-for (const [url, file] of [
-  ['/api/line', 'line'], ['/api/pie', 'pie'], ['/api/h-bar', 'h-bar'],
-  ['/api/bar', 'bar'], ['/api/finance', 'finance'], ['/facebook', 'facebook'],
-  ['/apple', 'apple'], ['/tesla', 'tesla'], ['/userData', 'userData'], ['/charts', 'charts'],
-]) app.use(url, require('./routes/' + file));
-
-const validCredentials = (username, password) =>
-  typeof username === 'string' && username.trim().length > 0 &&
-  typeof password === 'string' && password.length > 0;
-
-app.post('/register', asyncHandler(async (req, res) => {
-  const { username, password } = req.body;
-  if (!validCredentials(username, password)) {
-    return res.status(400).json({ success: false, message: 'Username and password are required.' });
-  }
-  if (await models.User.findOne({ where: { username } })) {
-    return res.status(409).json({ success: false, message: 'Username has already been used.' });
-  }
-  await models.User.create({ username, password: await bcrypt.hash(password, 10) });
-  res.status(201).json({ success: true, message: 'Your username and password are registered!' });
-}));
-
-async function login(username, password, res) {
-  if (!validCredentials(username, password)) {
-    return res.status(400).json({ success: false, message: 'Username and password are required.' });
-  }
-  const user = await models.User.findOne({ where: { username } });
-  if (!user || !(await bcrypt.compare(password, user.password))) {
-    return res.status(401).json({ success: false, message: 'Incorrect username or password.' });
-  }
-  res.json({ success: true, message: 'You are now logged in!', token: tokens.sign(user), userId: user.id });
+const { HttpError } = require('./lib/errors');
+function createApp() {
+  const app = express();
+  const runtime = require('./config/runtime')();
+  app.locals.runtime = runtime;
+  app.locals.shuttingDown = false;
+  app.disable('x-powered-by');
+  app.set('trust proxy', runtime.TRUST_PROXY_HOPS);
+  app.use((req, res, next) => { req.requestId = randomUUID(); res.set('X-Request-ID', req.requestId); next(); });
+  app.use(helmet());
+  app.get('/health/live', (req, res) => res.json({ status: 'ok' }));
+  app.get('/health/ready', async (req, res) => {
+    res.set('Cache-Control', 'no-store');
+    try {
+      if (app.locals.shuttingDown) throw new Error('draining');
+      await models.sequelize.authenticate();
+      const rows = await models.sequelize.query('SELECT name FROM "SequelizeMeta" WHERE name = :name', { replacements: { name: require('./lib/migrate').latestMigration }, type: models.Sequelize.QueryTypes.SELECT });
+      if (!rows.length) throw new Error('migrations pending');
+      await models.sequelize.query('SELECT "id" FROM "AuthSessions" LIMIT 0');
+      await models.sequelize.query('SELECT "source" FROM "Companies" LIMIT 0');
+      await models.sequelize.query('SELECT "userId" FROM "SavedData" LIMIT 0');
+      res.json({ status: 'ready' });
+    } catch (_) { res.status(503).json({ status: 'not_ready' }); }
+  });
+  app.use((req, res, next) => {
+    const origin = req.get('Origin');
+    if (origin && !runtime.origins.includes(origin)) throw new HttpError(403, 'Origin is not allowed.', 'ORIGIN_FORBIDDEN');
+    // Blocks browser cross-site mutations, including missing/opaque Origin requests.
+    if (!['GET', 'HEAD', 'OPTIONS'].includes(req.method) && req.get('Sec-Fetch-Site') === 'cross-site') throw new HttpError(403, 'Cross-site requests are not allowed.', 'ORIGIN_FORBIDDEN');
+    next();
+  });
+  app.use(cors({ origin: runtime.origins, credentials: true, methods: ['GET', 'POST', 'DELETE', 'OPTIONS'], allowedHeaders: ['Content-Type', 'Authorization', 'X-CSRF-Token'], maxAge: 600 }));
+  const limiter = (windowMs, limit) => rateLimit({ windowMs, limit, standardHeaders: 'draft-8', legacyHeaders: false, message: { success: false, code: 'RATE_LIMITED', message: 'Too many requests. Try again later.' } });
+  app.use(limiter(60000, runtime.API_RATE_LIMIT_MAX));
+  app.use(['/register', '/api/login', '/api/guest-login'], limiter(15 * 60000, runtime.AUTH_RATE_LIMIT_MAX));
+  app.use((req, res, next) => {
+    if (req.method === 'POST' && !['/api/logout', '/api/guest-login', '/api/test'].includes(req.path) && !req.is('application/json')) throw new HttpError(415, 'Use application/json.', 'UNSUPPORTED_MEDIA_TYPE');
+    next();
+  });
+  app.use(express.json({ limit: '1mb', strict: true }));
+  app.use(cookieParser());
+  app.use(require('./routes/auth'));
+  app.use(require('./routes/data'));
+  for (const [url, file] of [
+    ['/api/line', 'line'], ['/api/pie', 'pie'], ['/api/h-bar', 'h-bar'],
+    ['/api/bar', 'bar'], ['/api/finance', 'finance'], ['/facebook', 'facebook'],
+    ['/apple', 'apple'], ['/tesla', 'tesla'], ['/userData', 'userData'], ['/charts', 'charts'],
+  ]) app.use(url, require('./routes/' + file));
+  app.post('/api/test', (req, res) => res.json({ success: true }));
+  app.use((req, res, next) => next(new HttpError(404, 'Endpoint not found.', 'NOT_FOUND')));
+  app.use((error, req, res, next) => {
+    if (res.headersSent) return next(error);
+    let status = error instanceof HttpError ? error.status : 500;
+    if (error.type === 'entity.parse.failed') status = 400;
+    if (error.type === 'entity.too.large') status = 413;
+    const message = status === 500 ? 'Unable to complete the request.' : status === 413 ? 'Request body exceeds 1 MiB.' : error.type === 'entity.parse.failed' ? 'Invalid JSON.' : error.message;
+    if (status >= 500) console.error(JSON.stringify({ level: 'error', requestId: req.requestId, method: req.method, path: req.path, errorType: error.name }));
+    res.set('Cache-Control', 'no-store').status(status).json({ success: false, code: error.code || (status === 500 ? 'INTERNAL_ERROR' : 'BAD_REQUEST'), message, requestId: req.requestId, ...(error.details ? { details: error.details } : {}) });
+  });
+  return app;
 }
-app.post('/api/login', asyncHandler((req, res) => login(req.body.username, req.body.password, res)));
-app.post('/api/guest-login', asyncHandler((req, res) => {
-  const username = process.env.REACT_APP_USERNAME;
-  const password = process.env.REACT_APP_PASSWORD;
-  if (!validCredentials(username, password)) {
-    return res.status(503).json({ success: false, message: 'Guest login is not configured.' });
-  }
-  return login(username, password, res);
-}));
-
-function validRows(rows) {
-  return Array.isArray(rows) && rows.length > 0 &&
-    rows.every(row => row !== null && typeof row === 'object' && !Array.isArray(row));
-}
-app.post('/chart-data', auth, asyncHandler(async (req, res) => {
-  if (!validRows(req.body)) return res.status(400).json({ message: 'Expected a nonempty array of chart rows.' });
-  const rows = req.body.map(row => ({
-    symbol: row.symbol, date: row.date, revenue: row.revenue,
-    costAndExpenses: row.costAndExpenses, grossProfit: row.grossProfit,
-  }));
-  await models.Company.bulkCreate(rows);
-  res.status(201).json({ message: 'Success', count: rows.length });
-}));
-app.post('/api/data', auth, asyncHandler(async (req, res) => {
-  if (!validRows(req.body)) return res.status(400).json({ message: 'Expected a nonempty array of CSV rows.' });
-  const rows = req.body.map(row => ({
-    revenue: row.Revenue, expenses: row.Expenses, cost_expenses: row.costAndExpenses,
-    gross_profit: row.grossProfit, company: row.company, userId: req.user.id,
-  }));
-  await models.SavedData.bulkCreate(rows);
-  res.status(201).json({ message: 'Data saved.', count: rows.length });
-}));
-app.post('/api/test', (req, res) => res.json());
-app.use((error, req, res, next) => {
-  if (res.headersSent) return next(error);
-  const status = error.type === 'entity.parse.failed' ? 400 : 500;
-  res.status(status).json({ success: false, message: status === 400 ? 'Invalid JSON.' : 'Unable to complete the request.' });
-});
-if (require.main === module) {
-  const port = process.env.PORT || 3001;
-  app.listen(port, () => console.log('Server running on port ' + port));
-}
-module.exports = app;
+module.exports = createApp();
+module.exports.createApp = createApp;

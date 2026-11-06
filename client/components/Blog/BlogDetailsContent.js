@@ -18,13 +18,13 @@ class BlogDetailsContent extends Component {
                                     <div className="entry-meta">
                                         <ul>
                                             <li>
-                                                <span>Posted on:</span> 
+                                                <span>Posted on:</span>
                                                 February 12, 2020
                                             </li>
                                             <li>
-                                                <span>Posted by:</span> 
+                                                <span>Posted by:</span>
                                                 <Link href="#">
-                                                    <a>John Anderson</a>
+                                                    John Anderson
                                                 </Link>
                                             </li>
                                         </ul>
@@ -39,7 +39,7 @@ class BlogDetailsContent extends Component {
                                     </blockquote>
 
                                     <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur</p>
- 
+
                                     <ul className="wp-block-gallery columns-3">
                                         <li className="blocks-gallery-item">
                                             <figure>
@@ -73,10 +73,10 @@ class BlogDetailsContent extends Component {
                                         </span>
 
                                         <Link href="#">
-                                            <a>Fashion</a>
+                                            Fashion
                                         </Link>
                                         <Link href="#">
-                                            <a>Travel</a>
+                                            Travel
                                         </Link>
                                     </div>
 
@@ -84,24 +84,24 @@ class BlogDetailsContent extends Component {
                                         <ul className="social">
                                             <li><span>Share:</span></li>
                                             <li>
-                                                <Link href="#">
-                                                    <a target="_blank">
+                                                <Link href="#" target="_blank">
+
                                                         <i className="fab fa-facebook-f"></i>
-                                                    </a>
+
                                                 </Link>
                                             </li>
                                             <li>
-                                                <Link href="#">
-                                                    <a target="_blank">
+                                                <Link href="#" target="_blank">
+
                                                         <i className="fab fa-twitter"></i>
-                                                    </a>
+
                                                 </Link>
                                             </li>
                                             <li>
-                                                <Link href="#">
-                                                    <a target="_blank">
+                                                <Link href="#" target="_blank">
+
                                                         <i className="fab fa-instagram"></i>
-                                                    </a>
+
                                                 </Link>
                                             </li>
                                         </ul>
@@ -123,9 +123,9 @@ class BlogDetailsContent extends Component {
                                                     </div>
                                                     <div className="comment-metadata">
                                                         <Link href="#">
-                                                            <a>
+
                                                                 <time>February 24, 2020 at 10:59 am</time>
-                                                            </a>
+
                                                         </Link>
                                                     </div>
                                                 </footer>
@@ -135,8 +135,8 @@ class BlogDetailsContent extends Component {
                                                 </div>
 
                                                 <div className="reply">
-                                                    <Link href="#">
-                                                        <a className="comment-reply-link">Reply</a>
+                                                    <Link href="#" className="comment-reply-link">
+                                                        Reply
                                                     </Link>
                                                 </div>
                                             </article>
@@ -152,9 +152,9 @@ class BlogDetailsContent extends Component {
                                                             </div>
                                                             <div className="comment-metadata">
                                                                 <Link href="#">
-                                                                    <a>
+
                                                                         <time>February 24, 2020 at 10:59 am</time>
-                                                                    </a>
+
                                                                 </Link>
                                                             </div>
                                                         </footer>
@@ -164,8 +164,8 @@ class BlogDetailsContent extends Component {
                                                         </div>
 
                                                         <div className="reply">
-                                                            <Link href="#">
-                                                                <a className="comment-reply-link">Reply</a>
+                                                            <Link href="#" className="comment-reply-link">
+                                                                Reply
                                                             </Link>
                                                         </div>
                                                     </article>
@@ -182,9 +182,9 @@ class BlogDetailsContent extends Component {
                                                                 </div>
                                                                 <div className="comment-metadata">
                                                                     <Link href="#">
-                                                                        <a>
+
                                                                             <time>February 24, 2020 at 10:59 am</time>
-                                                                        </a>
+
                                                                     </Link>
                                                                 </div>
                                                             </footer>
@@ -194,8 +194,8 @@ class BlogDetailsContent extends Component {
                                                             </div>
 
                                                             <div className="reply">
-                                                                <Link href="#">
-                                                                    <a className="comment-reply-link">Reply</a>
+                                                                <Link href="#" className="comment-reply-link">
+                                                                    Reply
                                                                 </Link>
                                                             </div>
                                                         </article>
@@ -214,9 +214,9 @@ class BlogDetailsContent extends Component {
                                                     </div>
                                                     <div className="comment-metadata">
                                                         <Link href="#">
-                                                            <a>
+
                                                                 <time>February 24, 2020 at 10:59 am</time>
-                                                            </a>
+
                                                         </Link>
                                                     </div>
                                                 </footer>
@@ -226,8 +226,8 @@ class BlogDetailsContent extends Component {
                                                 </div>
 
                                                 <div className="reply">
-                                                    <Link href="#">
-                                                        <a className="comment-reply-link">Reply</a>
+                                                    <Link href="#" className="comment-reply-link">
+                                                        Reply
                                                     </Link>
                                                 </div>
                                             </article>
@@ -241,7 +241,7 @@ class BlogDetailsContent extends Component {
                                         <form className="comment-form">
                                             <p className="comment-notes">
                                                 <span>Your email address will not be published.</span>
-                                                Required fields are marked 
+                                                Required fields are marked
                                                 <span className="required">*</span>
                                             </p>
                                             <p className="comment-form-comment">
@@ -272,7 +272,7 @@ class BlogDetailsContent extends Component {
                                 </div>
                             </div>
                         </div>
-                    
+
                         <div className="col-lg-4">
                             <BlogSideBar />
                         </div>

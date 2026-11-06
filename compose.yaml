@@ -1,0 +1,80 @@
+name: business-intelligence-app
+
+x-api-environment: &api-environment
+  NODE_ENV: development
+  HOST: 0.0.0.0
+  PORT: 3001
+  DATABASE_URL: postgres://${POSTGRES_USER:-bi_app}:${POSTGRES_PASSWORD:?Generate .env with node deploy/init-local-env.cjs}@db:5432/${POSTGRES_DB:-bi_app}
+  JWT_PASSWORD: ${JWT_PASSWORD:?Generate .env with node deploy/init-local-env.cjs}
+  CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:3000}
+  COOKIE_SECURE: ${COOKIE_SECURE:-false}
+  TRUST_PROXY_HOPS: 0
+
+services:
+  db:
+    image: postgres:16-bookworm
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-bi_app}
+      POSTGRES_USER: ${POSTGRES_USER:-bi_app}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Generate .env with node deploy/init-local-env.cjs}
+    ports:
+      - 127.0.0.1:${DB_PORT:-5432}:5432
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: [CMD-SHELL, 'pg_isready -U "$${POSTGRES_USER}" -d "$${POSTGRES_DB}"']
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  migrate:
+    build:
+      context: .
+      dockerfile: deploy/Dockerfile.api
+    environment: *api-environment
+    depends_on:
+      db:
+        condition: service_healthy
+    command: [npm, run, migrate]
+    restart: "no"
+    init: true
+
+  api:
+    build:
+      context: .
+      dockerfile: deploy/Dockerfile.api
+    environment: *api-environment
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    ports:
+      - 127.0.0.1:${API_PORT:-3001}:3001
+    restart: unless-stopped
+    init: true
+    security_opt:
+      - no-new-privileges:true
+    cap_drop: [ALL]
+
+  client:
+    build:
+      context: .
+      dockerfile: deploy/Dockerfile.client
+      args:
+        BACKEND_URL: http://api:3001
+    environment:
+      BACKEND_URL: http://api:3001
+      PORT: 3000
+    depends_on:
+      api:
+        condition: service_healthy
+    ports:
+      - 127.0.0.1:${WEB_PORT:-3000}:3000
+    restart: unless-stopped
+    init: true
+    security_opt:
+      - no-new-privileges:true
+    cap_drop: [ALL]
+
+volumes:
+  postgres-data:

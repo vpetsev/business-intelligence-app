@@ -9,7 +9,7 @@ class AboutUs extends Component {
           <div className="row align-items-center">
             <div className="col-lg-6">
               <div className="about-image">
-                <img src="/images/about.png" alt="image" />
+                <img src="/images/about.png" alt="" />
               </div>
             </div>
 
@@ -41,10 +41,10 @@ class AboutUs extends Component {
                   </li> */}
                 </ul>
 
-                <Link href="/about-us">
-                  <a className="default-btn">
+                <Link href="/about-us" className="default-btn">
+
                     Read More <span></span>
-                  </a>
+
                 </Link>
               </div>
             </div>
