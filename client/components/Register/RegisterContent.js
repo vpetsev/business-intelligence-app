@@ -1,3 +1,4 @@
+import { apiUrl } from "../../utils/Api";
 import React from "react";
 import Router from "next/router";
 // import loginImg from "../../public/images/login.svg";
@@ -20,18 +21,22 @@ class RegisterContent extends React.Component {
   };
 
   handleRegisterPost = () => {
-    fetch("https://bi-cube.herokuapp.com/register", {
+    fetch(apiUrl("/register"), {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(this.state.user),
     })
-      .then((res) => res.json())
+      .then(async (res) => {
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.message);
+        return data;
+      })
       .then((response) => {
         alert(response.message);
         Router.push("/login");
-      });
+      }).catch((error) => alert(error.message || "Unable to register."));
   };
 
   render() {

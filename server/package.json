@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
-    "scripts": {
-      "dev": "next",
-      "build": "next build",
-      "start": "next start"
-    },
+  "scripts": {
+    "start": "node app.js",
+    "dev": "node app.js",
+    "test": "node test/regression.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/dbc257/CPM-Cube.git"

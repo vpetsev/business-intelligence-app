@@ -1,3 +1,4 @@
+import { apiUrl } from "../../utils/Api";
 // import React from "react";
 import React, { Component } from "react";
 import Router from "next/router";
@@ -32,55 +33,29 @@ class LoginContent extends React.Component {
     });
   };
 
+  handleLoginSuccess = (response) => {
+    if (!response.data.success) throw new Error(response.data.message);
+    const token = response.data.token;
+    localStorage.setItem("jsonwebtoken", token);
+    setAuthenticationHeader(token);
+    this.props.authenticated(true);
+    Router.push("/");
+  };
+
+  handleLoginFailure = (error) => {
+    const response = error.response && error.response.data;
+    alert((response && response.message) || error.message || "Unable to log in.");
+    this.setState({ user: { ...this.state.user, password: "" } });
+  };
+
   handleLoginPost = () => {
-    axios
-      .post("https://bi-cube.herokuapp.com/api/login", {
-        username: this.state.user.username,
-        password: this.state.user.password,
-      })
-      .then((response) => {
-        if (response.data.success) {
-          const token = response.data.token;
-          localStorage.setItem("jsonwebtoken", token);
-          setAuthenticationHeader(token);
-          console.log(token);
-          this.props.authenticated(true);
-          alert(response.data.message);
-          Router.push("/");
-        } else {
-          alert(response.data.message);
-          alert("response failed");
-          this.props.state = {
-            user: {
-              ...this.state.user,
-              password: "",
-            },
-          };
-        }
-      });
+    axios.post(apiUrl("/api/login"), this.state.user)
+      .then(this.handleLoginSuccess).catch(this.handleLoginFailure);
   };
 
   handleGuestPost = () => {
-    axios.post("https://bi-cube.herokuapp.com/api/guest-login", {}).then((response) => {
-      if (response.data.success) {
-        const token = response.data.token;
-        localStorage.setItem("jsonwebtoken", token);
-        setAuthenticationHeader(token);
-        console.log(token);
-        this.props.authenticated(true);
-        alert(response.data.message);
-        Router.push("/");
-      } else {
-        alert(response.data.message);
-        alert("response failed");
-        this.props.state = {
-          user: {
-            ...this.state.user,
-            password: "",
-          },
-        };
-      }
-    });
+    axios.post(apiUrl("/api/guest-login"), {})
+      .then(this.handleLoginSuccess).catch(this.handleLoginFailure);
   };
 
   render() {
