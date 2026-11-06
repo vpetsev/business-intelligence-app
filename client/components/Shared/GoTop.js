@@ -1,61 +1,10 @@
-class GoTop extends React.Component {
-    _isMounted = false;
-    constructor(props) {
-        super(props);
-        this.state = {
-            intervalId: 0,
-            thePosition: false
-        }
-    };
-
-    componentDidMount() {
-        this._isMounted = true;
-        document.addEventListener("scroll", () => {
-            if (window.scrollY > 170) {
-                this.setState({ thePosition: true })
-            } else {
-                this.setState({ thePosition: false })
-            }
-        });
-        window.scrollTo(0, 0);
-    }
-    
-    onScrollStep = () => {
-        this._isMounted = true;
-        if (window.pageYOffset === 0){
-            clearInterval(this.state.intervalId);
-        }
-        window.scroll(0, window.pageYOffset - this.props.scrollStepInPx);
-    }
-
-    scrollToTop = () => {
-        this._isMounted = true;
-        let intervalId = setInterval(this.onScrollStep, this.props.delayInMs);
-        this.setState({ intervalId: intervalId });
-    }
-
-    componentWillUnmount() {
-        this._isMounted = false;
-    }
-
-    renderGoTopIcon = () => {
-        if (this.state.thePosition){
-            return (
-                <div className="go-top" onClick={this.scrollToTop}>
-                    <i className="fas fa-chevron-up"></i>
-                    <i className="fas fa-chevron-up"></i>
-                </div>
-            )
-        }
-    }
-
-    render(){
-        return (
-            <React.Fragment>
-                {this.renderGoTopIcon()}
-            </React.Fragment>
-        )
-    }
+import { useEffect, useState } from 'react';
+export default function GoTop() {
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    const update = () => setVisible(window.scrollY > 170);
+    update(); window.addEventListener('scroll', update, { passive: true });
+    return () => window.removeEventListener('scroll', update);
+  }, []);
+  return visible ? <button type="button" className="go-top" aria-label="Back to top" onClick={() => window.scrollTo({ top: 0, behavior: 'auto' })}><i className="fas fa-chevron-up" aria-hidden="true" /></button> : null;
 }
-
-export default GoTop;

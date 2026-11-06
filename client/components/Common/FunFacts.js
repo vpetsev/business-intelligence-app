@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ReactWOW from 'react-wow';
+
 
 class FunFacts extends Component {
     render() {
@@ -8,7 +8,7 @@ class FunFacts extends Component {
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-3 col-sm-6">
-                            <ReactWOW animation='fadeInUp' delay='.1s'>
+                            <>
                                 <div className="single-fun-fact">
                                     <h3>
                                         820
@@ -16,11 +16,11 @@ class FunFacts extends Component {
                                     </h3>
                                     <p>Data Analytics</p>
                                 </div>
-                            </ReactWOW>
+                            </>
                         </div>
 
                         <div className="col-lg-3 col-sm-6">
-                            <ReactWOW animation='fadeInUp' delay='.2s'>
+                            <>
                                 <div className="single-fun-fact">
                                     <h3>
                                         150
@@ -28,11 +28,11 @@ class FunFacts extends Component {
                                     </h3>
                                     <p>Data Management</p>
                                 </div>
-                            </ReactWOW>
+                            </>
                         </div>
 
                         <div className="col-lg-3 col-sm-6">
-                            <ReactWOW animation='fadeInUp' delay='.3s'>
+                            <>
                                 <div className="single-fun-fact">
                                     <h3>
                                         20
@@ -40,11 +40,11 @@ class FunFacts extends Component {
                                     </h3>
                                     <p>Managed  Analytics</p>
                                 </div>
-                            </ReactWOW>
+                            </>
                         </div>
 
                         <div className="col-lg-3 col-sm-6">
-                            <ReactWOW animation='fadeInUp' delay='.4s'>
+                            <>
                                 <div className="single-fun-fact">
                                     <h3>
                                         120
@@ -52,7 +52,7 @@ class FunFacts extends Component {
                                     </h3>
                                     <p>Big Data</p>
                                 </div>
-                            </ReactWOW>
+                            </>
                         </div>
                     </div>
                 </div>

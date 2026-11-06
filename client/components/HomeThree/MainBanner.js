@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Link from 'next/link';
-import ReactWOW from 'react-wow';
+
 
 class MainBanner extends Component {
     render() {
@@ -16,16 +16,16 @@ class MainBanner extends Component {
                                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
 
                                         <div className="banner-btn">
-                                            <Link href="/about-us">
-                                                <a className="default-btn-one">
+                                            <Link href="/about-us" className="default-btn-one">
+
                                                     About Us <span></span>
-                                                </a>
+
                                             </Link>
 
-                                            <Link href="/contact">
-                                                <a className="default-btn">
+                                            <Link href="/contact" className="default-btn">
+
                                                     Contact Us <span></span>
-                                                </a>
+
                                             </Link>
                                         </div>
                                     </div>
@@ -33,54 +33,54 @@ class MainBanner extends Component {
 
                                 <div className="col-lg-6 col-md-12">
                                     <div className="banner-image">
-                                        <ReactWOW animation='fadeInUp' delay='0.2s'>
+                                        <>
                                             <img src="/images/home-three/home-three-shape1.png" alt="image" />
-                                        </ReactWOW>
+                                        </>
 
-                                        <ReactWOW animation='fadeInUp' delay='0.2s'>
+                                        <>
                                             <img src="/images/home-three/home-three-shape2.png" alt="image" />
-                                        </ReactWOW>
+                                        </>
 
-                                        <ReactWOW animation='fadeInLeft' delay='0.2s'>
+                                        <>
                                             <img src="/images/home-three/home-three-shape3.png" alt="image" />
-                                        </ReactWOW>
+                                        </>
 
-                                        <ReactWOW animation='zoomIn' delay='0.2s'>
+                                        <>
                                             <img src="/images/home-three/home-three-shape4.png" alt="image" />
-                                        </ReactWOW>
+                                        </>
 
-                                        <ReactWOW animation='bounceIn' delay='0.2s'>
+                                        <>
                                             <img src="/images/home-three/home-three-shape5.png" alt="image" />
-                                        </ReactWOW>
+                                        </>
 
-                                        <ReactWOW animation='fadeInDown' delay='0.2s'>
+                                        <>
                                             <img src="/images/home-three/home-three-shape6.png" alt="image" />
-                                        </ReactWOW>
+                                        </>
 
-                                        <ReactWOW animation='zoomIn' delay='0.2s'>
+                                        <>
                                             <img src="/images/home-three/home-three-shape7.png" alt="image" />
-                                        </ReactWOW>
+                                        </>
 
-                                        <ReactWOW animation='fadeInUp' delay='0.2s'>
+                                        <>
                                             <img src="/images/home-three/home-three-shape8.png" alt="image" />
-                                        </ReactWOW>
+                                        </>
 
-                                        <ReactWOW animation='rotateIn' delay='0.2s'>
+                                        <>
                                             <img src="/images/home-three/home-three-shape9.png" alt="image" />
-                                        </ReactWOW>
+                                        </>
 
-                                        <ReactWOW animation='fadeInUp' delay='0.2s'>
+                                        <>
                                             <img src="/images/home-three/home-three-shape10.png" alt="image" />
-                                        </ReactWOW>
+                                        </>
 
-                                        <ReactWOW animation='zoomIn' delay='0.2s'>
+                                        <>
                                             <img src="/images/home-three/home-three-shape11.png" alt="image" />
-                                        </ReactWOW>
+                                        </>
 
                                         {/* Main Image */}
-                                        <ReactWOW animation='zoomIn' delay='0.4s'>
+                                        <>
                                             <img src="/images/home-three/main-image3.png" alt="image" />
-                                        </ReactWOW>
+                                        </>
                                     </div>
                                 </div>
                             </div>

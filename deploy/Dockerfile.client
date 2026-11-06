@@ -1,0 +1,25 @@
+# syntax=docker/dockerfile:1
+ARG NODE_IMAGE=node:26-bookworm-slim
+FROM ${NODE_IMAGE} AS builder
+WORKDIR /app/client
+COPY client/package.json client/package-lock.json ./
+RUN npm ci
+COPY client/ ./
+ARG BACKEND_URL=http://api:3001
+ENV BACKEND_URL=${BACKEND_URL} NEXT_TELEMETRY_DISABLED=1
+RUN npm run build && npm prune --omit=dev
+
+FROM ${NODE_IMAGE} AS runtime
+ENV NODE_ENV=production NEXT_TELEMETRY_DISABLED=1 PORT=3000
+WORKDIR /app/client
+COPY --from=builder --chown=node:node /app/client/package.json ./package.json
+COPY --from=builder --chown=node:node /app/client/package-lock.json ./package-lock.json
+COPY --from=builder --chown=node:node /app/client/node_modules ./node_modules
+COPY --from=builder --chown=node:node /app/client/.next ./.next
+COPY --from=builder --chown=node:node /app/client/public ./public
+COPY --from=builder --chown=node:node /app/client/next.config.js ./next.config.js
+USER node
+EXPOSE 3000
+HEALTHCHECK --interval=15s --timeout=5s --start-period=20s --retries=3 \
+  CMD node -e "fetch('http://127.0.0.1:'+(process.env.PORT||3000),{signal:AbortSignal.timeout(4000)}).then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"
+CMD ["npm", "start", "--", "--hostname", "0.0.0.0"]

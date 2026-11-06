@@ -37,11 +37,11 @@ class AboutUs extends Component {
                                         Advanced Advisory Team
                                     </li>
                                 </ul>
-                                
-                                <Link href="/about-us">
-                                    <a className="default-btn">
+
+                                <Link href="/about-us" className="default-btn">
+
                                         Read More <span></span>
-                                    </a>
+
                                 </Link>
                             </div>
                         </div>

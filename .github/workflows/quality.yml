@@ -1,0 +1,122 @@
+name: Quality
+
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: quality-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    services:
+      postgres:
+        image: postgres:16-bookworm
+        env:
+          POSTGRES_DB: bi_regression
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: ci-postgres-only
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d bi_regression"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      TEST_DATABASE_URL: postgres://postgres:ci-postgres-only@127.0.0.1:5432/bi_regression
+      E2E_DATABASE_URL: postgres://postgres:ci-postgres-only@127.0.0.1:5432/bi_e2e
+      JWT_PASSWORD: ci-only-signing-secret-never-use-outside-disposable-tests
+      CORS_ORIGINS: http://127.0.0.1:8320
+      COOKIE_SECURE: "false"
+      BACKEND_URL: http://127.0.0.1:8321
+      NEXT_TELEMETRY_DISABLED: "1"
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            client/package-lock.json
+            server/package-lock.json
+      - name: Install locked root, server and client dependencies
+        run: npm ci && npm run setup
+      - name: Check tracked artifacts and lockfiles
+        run: node deploy/check-repository.cjs
+      - name: Audit production and development dependencies
+        run: |
+          npm audit --include=dev --audit-level=moderate
+          npm audit --prefix server --include=dev --audit-level=moderate
+          npm audit --prefix client --include=dev --audit-level=moderate
+      - name: Run API regressions against an empty PostgreSQL database
+        run: npm run test:api
+      - name: Lint client source
+        run: npm run lint --prefix client
+      - name: Run client tests
+        run: npm run test:client
+      - name: Build client for the E2E backend
+        run: npm run build
+      - name: Create a separate E2E database
+        env:
+          PGPASSWORD: ci-postgres-only
+        run: psql -h 127.0.0.1 -U postgres -d postgres -v ON_ERROR_STOP=1 -c 'CREATE DATABASE bi_e2e;'
+      - name: Exercise migrations and seed twice
+        env:
+          NODE_ENV: test
+          DATABASE_URL: ${{ env.E2E_DATABASE_URL }}
+          TEST_DATABASE_URL: ${{ env.E2E_DATABASE_URL }}
+        run: |
+          npm run db:migrate
+          npm run db:migrate
+          npm run db:seed
+          npm run db:seed
+      - name: Install Chromium for Playwright
+        run: npx --no-install playwright install --with-deps chromium
+      - name: Run browser and accessibility regressions
+        run: npm run test:e2e
+      - name: Save browser diagnostics
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@330a01c490aca151604b8cf639adc76d48f6c5d4 # v5
+        with:
+          name: browser-diagnostics
+          path: |
+            playwright-report/
+            test-results/
+          if-no-files-found: ignore
+          retention-days: 7
+
+  containers:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version-file: .nvmrc
+      - name: Generate disposable local Compose configuration
+        run: node deploy/init-local-env.cjs
+      - name: Validate Compose configuration
+        run: docker compose config --quiet
+      - name: Build and start the local container stack
+        run: docker compose up --build --detach --wait --wait-timeout 180
+      - name: Seed and smoke-test both services
+        run: |
+          docker compose run --rm api npm run seed
+          curl --fail --retry 3 http://127.0.0.1:3001/health/ready
+          curl --fail --retry 3 --output /dev/null http://127.0.0.1:3000/
+      - name: Container diagnostics
+        if: failure()
+        run: docker compose ps && docker compose logs --no-color --tail 100
+      - name: Stop disposable CI containers
+        if: always()
+        run: docker compose down

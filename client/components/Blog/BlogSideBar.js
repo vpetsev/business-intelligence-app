@@ -22,51 +22,51 @@ class BlogSideBar extends Component {
                     <h3 className="widget-title">Recent posts</h3>
 
                     <article className="item">
-                        <Link href="#">
-                            <a className="thumb">
+                        <Link href="#" className="thumb">
+
                                 <span className="fullimage cover bg1" role="img"></span>
-                            </a>
+
                         </Link>
 
                         <div className="info">
                             <time>February 10, 2020</time>
                             <h4 className="title usmall">
                                 <Link href="#">
-                                    <a>Making peace with the feast or famine of freelancing</a>
+                                    Making peace with the feast or famine of freelancing
                                 </Link>
                             </h4>
                         </div>
                     </article>
 
                     <article className="item">
-                        <Link href="#">
-                            <a className="thumb">
+                        <Link href="#" className="thumb">
+
                                 <span className="fullimage cover bg2" role="img"></span>
-                            </a>
+
                         </Link>
 
                         <div className="info">
                             <time>June 21, 2020</time>
                             <h4 className="title usmall">
                                 <Link href="#">
-                                    <a>I used the web for a day on a 50 mb budget</a>
+                                    I used the web for a day on a 50 mb budget
                                 </Link>
                             </h4>
                         </div>
                     </article>
 
                     <article className="item">
-                        <Link href="#">
-                            <a className="thumb">
+                        <Link href="#" className="thumb">
+
                                 <span className="fullimage cover bg3" role="img"></span>
-                            </a>
+
                         </Link>
 
                         <div className="info">
                             <time>June 30, 2020</time>
                             <h4 className="title usmall">
                                 <Link href="#">
-                                    <a>How to create a responsive popup gallery?</a>
+                                    How to create a responsive popup gallery?
                                 </Link>
                             </h4>
                         </div>
@@ -79,27 +79,27 @@ class BlogSideBar extends Component {
                     <ul>
                         <li>
                             <Link href="#">
-                                <a>Business <span className="post-count">(2)</span></a>
+                                Business <span className="post-count">(2)</span>
                             </Link>
                         </li>
                         <li>
                             <Link href="#">
-                                <a>Privacy <span className="post-count">(5)</span></a>
+                                Privacy <span className="post-count">(5)</span>
                             </Link>
                         </li>
                         <li>
                             <Link href="#">
-                                <a>Technology <span className="post-count">(7)</span></a>
+                                Technology <span className="post-count">(7)</span>
                             </Link>
                         </li>
                         <li>
                             <Link href="#">
-                                <a>Tips <span className="post-count">(4)</span></a>
+                                Tips <span className="post-count">(4)</span>
                             </Link>
                         </li>
                         <li>
                             <Link href="#">
-                                <a>Uncategorized <span className="post-count">(5)</span></a>
+                                Uncategorized <span className="post-count">(5)</span>
                             </Link>
                         </li>
                     </ul>
@@ -112,119 +112,119 @@ class BlogSideBar extends Component {
                         <li>
                             <span className="comment-author-link">
                                 <Link href="#">
-                                    <a>A React commenter</a>
+                                    A React commenter
                                 </Link>
                             </span>
                             on
                             <Link href="#">
-                                <a>Hello world!</a>
+                                Hello world!
                             </Link>
                         </li>
                         <li>
                             <span className="comment-author-link">
                                 <Link href="#">
-                                    <a>Raxr</a>
+                                    Raxr
                                 </Link>
                             </span>
                             on
                             <Link href="#">
-                                <a>Hello world!</a>
+                                Hello world!
                             </Link>
                         </li>
                         <li>
                             <span className="comment-author-link">
                                 <Link href="#">
-                                    <a>React Next</a>
+                                    React Next
                                 </Link>
                             </span>
                             on
                             <Link href="#">
-                                <a>Hello world!</a>
+                                Hello world!
                             </Link>
                         </li>
                         <li>
                             <span className="comment-author-link">
                                 <Link href="#">
-                                    <a>A React Next Commenter</a>
+                                    A React Next Commenter
                                 </Link>
                             </span>
                             on
                             <Link href="#">
-                                <a>Hello world!</a>
+                                Hello world!
                             </Link>
                         </li>
                         <li>
                             <span className="comment-author-link">
                                 <Link href="#">
-                                    <a>Raxr</a>
+                                    Raxr
                                 </Link>
                             </span>
                             on
                             <Link href="#">
-                                <a>Hello world!</a>
+                                Hello world!
                             </Link>
                         </li>
                     </ul>
                 </div>
- 
+
                 <div className="widget widget_tag_cloud">
                     <h3 className="widget-title">Tags</h3>
 
                     <div className="tagcloud section-bottom">
                         <Link href="#">
-                            <a>
-                                IT 
+
+                                IT
                                 <span className="tag-link-count"> (3)</span>
-                            </a>
+
                         </Link>
 
                         <Link href="#">
-                            <a>
-                                Raxr 
+
+                                Raxr
                                 <span className="tag-link-count"> (3)</span>
-                            </a>
+
                         </Link>
 
                         <Link href="#">
-                            <a>
-                                Games 
+
+                                Games
                                 <span className="tag-link-count"> (2)</span>
-                            </a>
+
                         </Link>
 
                         <Link href="#">
-                            <a>
-                                Fashion 
+
+                                Fashion
                                 <span className="tag-link-count"> (2)</span>
-                            </a>
+
                         </Link>
 
                         <Link href="#">
-                            <a>
-                                Travel 
+
+                                Travel
                                 <span className="tag-link-count"> (1)</span>
-                            </a>
+
                         </Link>
 
                         <Link href="#">
-                            <a>
-                                Smart 
+
+                                Smart
                                 <span className="tag-link-count"> (1)</span>
-                            </a>
+
                         </Link>
 
                         <Link href="#">
-                            <a>
-                                Marketing 
+
+                                Marketing
                                 <span className="tag-link-count"> (1)</span>
-                            </a>
+
                         </Link>
 
                         <Link href="#">
-                            <a>
-                                Tips 
+
+                                Tips
                                 <span className="tag-link-count"> (2)</span>
-                            </a>
+
                         </Link>
                     </div>
                 </div>

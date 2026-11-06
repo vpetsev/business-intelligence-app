@@ -21,11 +21,11 @@ class OurServices extends Component {
                                 <h3>Big Data</h3>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim.</p>
 
-                                <Link href="/service-details">
-                                    <a className="service-btn">
+                                <Link href="/service-details" className="service-btn">
+
                                         Read More
                                         <i className="flaticon-right"></i>
-                                    </a>
+
                                 </Link>
                             </div>
                         </div>
@@ -39,11 +39,11 @@ class OurServices extends Component {
                                 <h3>Data Analytics</h3>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim.</p>
 
-                                <Link href="/service-details">
-                                    <a className="service-btn">
+                                <Link href="/service-details" className="service-btn">
+
                                         Read More
                                         <i className="flaticon-right"></i>
-                                    </a>
+
                                 </Link>
                             </div>
                         </div>
@@ -56,11 +56,11 @@ class OurServices extends Component {
                                 <h3>Managed Analytics</h3>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim.</p>
 
-                                <Link href="/service-details">
-                                    <a className="service-btn">
+                                <Link href="/service-details" className="service-btn">
+
                                         Read More
                                         <i className="flaticon-right"></i>
-                                    </a>
+
                                 </Link>
                             </div>
                         </div>
@@ -73,11 +73,11 @@ class OurServices extends Component {
                                 <h3>Business Intelligence</h3>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim.</p>
 
-                                <Link href="/service-details">
-                                    <a className="service-btn">
+                                <Link href="/service-details" className="service-btn">
+
                                         Read More
                                         <i className="flaticon-right"></i>
-                                    </a>
+
                                 </Link>
                             </div>
                         </div>
@@ -90,11 +90,11 @@ class OurServices extends Component {
                                 <h3>Data Science</h3>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim.</p>
 
-                                <Link href="/service-details">
-                                    <a className="service-btn">
+                                <Link href="/service-details" className="service-btn">
+
                                         Read More
                                         <i className="flaticon-right"></i>
-                                    </a>
+
                                 </Link>
                             </div>
                         </div>
@@ -107,11 +107,11 @@ class OurServices extends Component {
                                 <h3>Data Management</h3>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim.</p>
 
-                                <Link href="/service-details">
-                                    <a className="service-btn">
+                                <Link href="/service-details" className="service-btn">
+
                                         Read More
                                         <i className="flaticon-right"></i>
-                                    </a>
+
                                 </Link>
                             </div>
                         </div>

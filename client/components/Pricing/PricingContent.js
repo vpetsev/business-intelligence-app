@@ -20,7 +20,7 @@ class PricingContent extends Component {
 
                                 <ul className="pricing-features">
                                     <li>
-                                        <i className="fas fa-check"></i> 
+                                        <i className="fas fa-check"></i>
                                         Managed Analytics
                                     </li>
                                     <li>
@@ -28,26 +28,26 @@ class PricingContent extends Component {
                                         Business Intelligence
                                     </li>
                                     <li>
-                                        <i className="fas fa-check"></i> 
+                                        <i className="fas fa-check"></i>
                                         International payments
                                     </li>
                                     <li>
-                                        <i className="fas fa-check"></i> 
+                                        <i className="fas fa-check"></i>
                                         Data Management
                                     </li>
                                     <li>
-                                        <i className="fas fa-check"></i> 
+                                        <i className="fas fa-check"></i>
                                         Social Integration
                                     </li>
                                     <li>
-                                        <i className="fas fa-check"></i> 
+                                        <i className="fas fa-check"></i>
                                         Relevant App Content
                                     </li>
                                 </ul>
 
                                 <div className="price-btn">
-                                    <Link href="#">
-                                        <a className="price-btn-one">Choose This Plan</a>
+                                    <Link href="#" className="price-btn-one">
+                                        Choose This Plan
                                     </Link>
                                 </div>
                             </div>
@@ -66,7 +66,7 @@ class PricingContent extends Component {
 
                                 <ul className="pricing-features">
                                     <li>
-                                        <i className="fas fa-check"></i> 
+                                        <i className="fas fa-check"></i>
                                         Managed Analytics
                                     </li>
                                     <li>
@@ -74,26 +74,26 @@ class PricingContent extends Component {
                                         Business Intelligence
                                     </li>
                                     <li>
-                                        <i className="fas fa-check"></i> 
+                                        <i className="fas fa-check"></i>
                                         International payments
                                     </li>
                                     <li>
-                                        <i className="fas fa-check"></i> 
+                                        <i className="fas fa-check"></i>
                                         Data Management
                                     </li>
                                     <li>
-                                        <i className="fas fa-check"></i> 
+                                        <i className="fas fa-check"></i>
                                         Social Integration
                                     </li>
                                     <li>
-                                        <i className="fas fa-check"></i> 
+                                        <i className="fas fa-check"></i>
                                         Relevant App Content
                                     </li>
                                 </ul>
 
                                 <div className="price-btn">
-                                    <Link href="#">
-                                        <a className="price-btn-one">Choose This Plan</a>
+                                    <Link href="#" className="price-btn-one">
+                                        Choose This Plan
                                     </Link>
                                 </div>
                             </div>
@@ -112,7 +112,7 @@ class PricingContent extends Component {
 
                                 <ul className="pricing-features">
                                     <li>
-                                        <i className="fas fa-check"></i> 
+                                        <i className="fas fa-check"></i>
                                         Managed Analytics
                                     </li>
                                     <li>
@@ -120,26 +120,26 @@ class PricingContent extends Component {
                                         Business Intelligence
                                     </li>
                                     <li>
-                                        <i className="fas fa-check"></i> 
+                                        <i className="fas fa-check"></i>
                                         International payments
                                     </li>
                                     <li>
-                                        <i className="fas fa-check"></i> 
+                                        <i className="fas fa-check"></i>
                                         Data Management
                                     </li>
                                     <li>
-                                        <i className="fas fa-check"></i> 
+                                        <i className="fas fa-check"></i>
                                         Social Integration
                                     </li>
                                     <li>
-                                        <i className="fas fa-check"></i> 
+                                        <i className="fas fa-check"></i>
                                         Relevant App Content
                                     </li>
                                 </ul>
 
                                <div className="price-btn">
-                                    <Link href="#">
-                                        <a className="price-btn-one">Choose This Plan</a>
+                                    <Link href="#" className="price-btn-one">
+                                        Choose This Plan
                                     </Link>
                                 </div>
                             </div>

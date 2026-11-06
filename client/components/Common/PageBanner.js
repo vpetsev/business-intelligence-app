@@ -16,7 +16,7 @@ class PageBanner extends Component {
                                 <ul>
                                     <li>
                                         <Link href={breadcrumbUrl}>
-                                            <a>{breadcrumbTextOne}</a>
+                                            {breadcrumbTextOne}
                                         </Link>
                                     </li>
                                     <li>{breadcrumbTextTwo}</li>

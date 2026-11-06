@@ -16,7 +16,7 @@ class CmingSoon extends Component {
         let now = new Date();
         let nowParse = (Date.parse(now) / 1000);
         let timeLeft = endTimeParse - nowParse;
-        let days = Math.floor(timeLeft / 86400); 
+        let days = Math.floor(timeLeft / 86400);
         let hours = Math.floor((timeLeft - (days * 86400)) / 3600);
         let minutes = Math.floor((timeLeft - (days * 86400) - (hours * 3600 )) / 60);
         let seconds = Math.floor((timeLeft - (days * 86400) - (hours * 3600) - (minutes * 60)));
@@ -29,7 +29,7 @@ class CmingSoon extends Component {
     }
 
     componentDidMount(){
-        this.myInterval = setInterval(() => { 
+        this.myInterval = setInterval(() => {
             this.commingSoonTime();
         }, 1000);
     };
@@ -63,7 +63,7 @@ class CmingSoon extends Component {
                                         <div id="hours">{this.state.hours} <span>Hours</span></div>
                                         <div id="minutes">{this.state.minutes} <span>Minutes</span></div>
                                         <div id="seconds">{this.state.seconds} <span>Seconds</span></div>
-                                    </div>	
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -72,31 +72,31 @@ class CmingSoon extends Component {
                     <ul className="social-list">
                         <li className="list-heading">Follow us for update:</li>
                         <li>
-                            <Link href="#">
-                                <a className="facebook" target="_blank">
+                            <Link href="#" className="facebook" target="_blank">
+
                                     <i className="fab fa-facebook-f"></i>
-                                </a>
+
                             </Link>
                         </li>
                         <li>
-                            <Link href="#">
-                                <a className="twitter" target="_blank">
+                            <Link href="#" className="twitter" target="_blank">
+
                                     <i className="fab fa-twitter"></i>
-                                </a>
+
                             </Link>
                         </li>
                         <li>
-                            <Link href="#">
-                                <a className="linkedin" target="_blank">
+                            <Link href="#" className="linkedin" target="_blank">
+
                                     <i className="fab fa-linkedin-in"></i>
-                                </a>
+
                             </Link>
                         </li>
                         <li>
-                            <Link href="#">
-                                <a className="instagram" target="_blank">
+                            <Link href="#" className="instagram" target="_blank">
+
                                     <i className="fab fa-instagram"></i>
-                                </a>
+
                             </Link>
                         </li>
                     </ul>

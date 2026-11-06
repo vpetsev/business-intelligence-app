@@ -72,10 +72,10 @@ class SolutionsTab extends Component {
                                             </ul>
 
                                             <div className="tab-btn">
-                                                <Link href="#">
-                                                    <a className="default-btn">
+                                                <Link href="#" className="default-btn">
+
                                                         Read More <span></span>
-                                                    </a>
+
                                                 </Link>
                                             </div>
                                         </div>
@@ -119,10 +119,10 @@ class SolutionsTab extends Component {
                                             </ul>
 
                                             <div className="tab-btn">
-                                                <Link href="#">
-                                                    <a className="default-btn">
+                                                <Link href="#" className="default-btn">
+
                                                         Read More <span></span>
-                                                    </a>
+
                                                 </Link>
                                             </div>
                                         </div>
@@ -154,10 +154,10 @@ class SolutionsTab extends Component {
                                             </ul>
 
                                             <div className="tab-btn">
-                                                <Link href="#">
-                                                    <a className="default-btn">
+                                                <Link href="#" className="default-btn">
+
                                                         Read More <span></span>
-                                                    </a>
+
                                                 </Link>
                                             </div>
                                         </div>
@@ -201,10 +201,10 @@ class SolutionsTab extends Component {
                                             </ul>
 
                                             <div className="tab-btn">
-                                                <Link href="#">
-                                                    <a className="default-btn">
+                                                <Link href="#" className="default-btn">
+
                                                         Read More <span></span>
-                                                    </a>
+
                                                 </Link>
                                             </div>
                                         </div>

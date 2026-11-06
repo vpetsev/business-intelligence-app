@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Link from 'next/link';
-import ReactWOW from 'react-wow';
+
 
 class MainBanner extends Component {
     render() {
@@ -16,18 +16,18 @@ class MainBanner extends Component {
                                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
 
                                         <div className="banner-btn">
-                                            <Link href="/about-us">
-                                                <a className="default-btn-one">
+                                            <Link href="/about-us" className="default-btn-one">
+
                                                     About Us
                                                     <span></span>
-                                                </a>
+
                                             </Link>
 
-                                            <Link href="/contact">
-                                                <a className="default-btn">
-                                                    Contact Us 
+                                            <Link href="/contact" className="default-btn">
+
+                                                    Contact Us
                                                     <span></span>
-                                                </a>
+
                                             </Link>
                                         </div>
                                     </div>
@@ -37,26 +37,26 @@ class MainBanner extends Component {
                                     <div className="banner-image">
                                         {/* Shape images */}
 
-                                        <ReactWOW animation='zoomIn' delay='0.2s'>
+                                        <>
                                             <img src="/images/home-one/home-one-shape1.png" alt="image" />
-                                        </ReactWOW>
+                                        </>
 
-                                        <ReactWOW animation='fadeInUp' delay='0.2s'>
+                                        <>
                                             <img src="/images/home-one/home-one-shape2.png" alt="image" />
-                                        </ReactWOW>
+                                        </>
 
-                                        <ReactWOW animation='zoomIn' delay='0.2s'>
+                                        <>
                                             <img src="/images/home-one/home-one-shape3.png" alt="image" />
-                                        </ReactWOW>
+                                        </>
 
-                                        <ReactWOW animation='rotateIn' delay='0.2s'>
+                                        <>
                                             <img src="/images/home-one/home-one-shape4.png" alt="image" />
-                                        </ReactWOW>
+                                        </>
 
                                         {/* Main image */}
-                                        <ReactWOW animation='zoomIn' delay='0.2s'>
+                                        <>
                                             <img src="/images/home-one/main-image1.png" alt="image" />
-                                        </ReactWOW>
+                                        </>
                                     </div>
                                 </div>
                             </div>

@@ -14,73 +14,73 @@ class Customers extends Component {
                     <div className="partner-list">
                         <div className="partner-item">
                             <Link href="/partner">
-                                <a>
+
                                     <img src="/images/partner/partner1.png" alt="image" />
-                                </a>
+
                             </Link>
                         </div>
 
                         <div className="partner-item">
                             <Link href="/partner">
-                                <a>
+
                                     <img src="/images/partner/partner2.png" alt="image" />
-                                </a>
+
                             </Link>
                         </div>
 
                         <div className="partner-item">
                             <Link href="/partner">
-                                <a>
+
                                     <img src="/images/partner/partner3.png" alt="image" />
-                                </a>
+
                             </Link>
                         </div>
 
                         <div className="partner-item">
                             <Link href="/partner">
-                                <a>
+
                                     <img src="/images/partner/partner4.png" alt="image" />
-                                </a>
+
                             </Link>
                         </div>
 
                         <div className="partner-item">
                             <Link href="/partner">
-                                <a>
+
                                     <img src="/images/partner/partner5.png" alt="image" />
-                                </a>
+
                             </Link>
                         </div>
 
                         <div className="partner-item">
                             <Link href="/partner">
-                                <a>
+
                                     <img src="/images/partner/partner5.png" alt="image" />
-                                </a>
+
                             </Link>
                         </div>
 
                         <div className="partner-item">
                             <Link href="/partner">
-                                <a>
+
                                     <img src="/images/partner/partner6.png" alt="image" />
-                                </a>
+
                             </Link>
                         </div>
 
                         <div className="partner-item">
                             <Link href="/partner">
-                                <a>
+
                                     <img src="/images/partner/partner7.png" alt="image" />
-                                </a>
+
                             </Link>
                         </div>
 
                         <div className="partner-item">
                             <Link href="/partner">
-                                <a>
+
                                     <img src="/images/partner/partner8.png" alt="image" />
-                                </a>
+
                             </Link>
                         </div>
                     </div>

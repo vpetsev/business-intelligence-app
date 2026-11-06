@@ -28,20 +28,20 @@ class MainBanner extends Component {
                     </p>
 
                     <div className="banner-btn">
-                      <Link href="/explore">
-                        <a className="default-btn-one">
+                      <Link href="/explore" className="default-btn-one">
+
                           Explore <span></span>
-                        </a>
+
                       </Link>
 
                       {/* <Link href="#play-video">
                                                 <a
                                                     onClick={e => {e.preventDefault(); this.openModal()}}
                                                     className="video-btn popup-youtube"
-                                                > 
+                                                >
                                                     <i className="fa fa-play"></i>
                                                     Watch Video
-                                                </a> 
+                                                </a>
                                             </Link> */}
                     </div>
                   </div>
@@ -57,7 +57,7 @@ class MainBanner extends Component {
 
                 <div className="col-lg-6 col-md-12">
                   <div className="banner-image">
-                    <img src="/images/home-four/main-image4.png" alt="image" />
+                    <img src="/images/home-four/main-image4.png" alt="" />
                   </div>
                 </div>
               </div>
@@ -66,7 +66,7 @@ class MainBanner extends Component {
         </div>
 
         <div className="creative-shape">
-          <img src="/images/main-banner-shape/home-shape-4.png" alt="image" />
+          <img src="/images/main-banner-shape/home-shape-4.png" alt="" />
         </div>
         <div className="lines">
           <div className="line"></div>
